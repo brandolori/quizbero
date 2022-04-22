@@ -4,8 +4,6 @@ import data, { Quiz } from "../src/quizData"
 import makeStyles from "../src/makeStyles"
 import Card from "../components/Card"
 
-
-
 const styles = makeStyles({
     cardHolder: {
         position: "relative",

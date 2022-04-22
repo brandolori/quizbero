@@ -16,8 +16,7 @@ const Layout = (props) => {
             {`
             @media (min-width: 768px) {
                 .container {
-                    width: 57%;
-                    max-width: 800px;
+                    max-width: 768px;
                 }
             }
             `}</style>
