@@ -2,23 +2,10 @@ import makeStyles from "../src/makeStyles"
 
 const styles = makeStyles({
     container: {
-        position: "relative",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-between",
         minHeight: "100%",
         margin: "0 auto",
-        padding: "1rem",
-        boxSizing: "border-box"
+        position: "relative",
     },
-    footer: {
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        padding: "1.5rem",
-        fontSize: ".8rem",
-        fontWeight: 200
-    }
 })
 
 const Layout = (props) => {
@@ -35,10 +22,7 @@ const Layout = (props) => {
             }
             `}</style>
         <div style={styles.container} className="container">
-            <div>
-                {props.children}
-            </div>
-            <footer style={styles.footer}> Copyright 2021 Lorenzo Bartolini</footer>
+            {props.children}
         </div>
     </div>
     )
