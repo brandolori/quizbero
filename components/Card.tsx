@@ -15,25 +15,7 @@ const styles = makeStyles({
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-    },
-    cardHolder: {
-        position: "relative",
-        width: "80%",
-        height: 400,
-        overflow: "visible",
-        margin: "auto",
-    },
-    container: {
-        position: "absolute",
-        top: 0,
-        left: 0,
-        bottom: 0,
-        right: 0,
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        minHeight: "100%"
+        textAlign: "center"
     },
     stamp: {
         borderRadius: 5,
@@ -59,7 +41,11 @@ const styles = makeStyles({
     }
 })
 
-type CardProps = { question: string, onAnswer: (answer: "v" | "f") => void }
+type CardProps = {
+    question: string,
+    onAnswer: (answer: "v" | "f") => void,
+    interactable: boolean
+}
 
 const Card = (props: CardProps) => {
     const motionValue = useMotionValue(0);
@@ -86,13 +72,13 @@ const Card = (props: CardProps) => {
     );
 
     return <motion.div
-        drag="x"
+        drag={props.interactable ? "x" : false}
         dragConstraints={{ left: -1000, right: 1000 }}
         dragSnapToOrigin={true}
         style={{ ...styles.card, opacity: cardOpacity, rotate: cardRotation, x: motionValue }}
         onDragEnd={(event, info) => {
-            // If the card is dragged only upto 150 on x-axis
-            // bring it back to initial position
+
+            //if the card is dragged over the threshold, call the callback
             if (Math.abs(info.offset.x) > 200) {
                 props.onAnswer(info.offset.x > 0 ? "v" : "f")
             }
@@ -104,23 +90,4 @@ const Card = (props: CardProps) => {
     </motion.div >
 }
 
-export default () => {
-
-    const [arr, setArr] = useState<("visible" | "invisible")[]>(["visible", "visible"])
-    return <div style={styles.container}>
-        <h1>Quercia Verde</h1>
-        <div style={styles.cardHolder}>
-            {
-                arr.map((el, i) =>
-                    el == "visible" && <Card key={i}
-                        question={"pipo" + i}
-                        onAnswer={() => {
-                            setArr(a => a.map((el, index) => index == i ? "invisible" : el))
-                        }}
-                    />
-                )
-            }
-        </div>
-        <h3>1 di 4</h3>
-    </div>;
-}
+export default Card

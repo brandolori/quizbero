@@ -1,6 +1,32 @@
 import { GetStaticPaths, GetStaticProps } from "next"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import data, { Quiz } from "../src/quizData"
+import makeStyles from "../src/makeStyles"
+import Card from "../components/Card"
+
+
+
+const styles = makeStyles({
+    cardHolder: {
+        position: "relative",
+        width: "80%",
+        height: 400,
+        overflow: "visible",
+        marginX: "auto",
+    },
+    container: {
+        position: "absolute",
+        top: 0,
+        left: 0,
+        bottom: 0,
+        right: 0,
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "space-between",
+        minHeight: "100%"
+    }
+})
 
 type QuizPageProps = {
     data: Quiz
@@ -8,16 +34,11 @@ type QuizPageProps = {
 
 const QuizPage = ({ data }: QuizPageProps) => {
 
-    // the index of the question that is being answered, or reviewed in the summary
-    const [questionIndex, setQuestionIndex] = useState(0)
-
     // only one phase of the quiz active at any time
     const [phase, setPhase] = useState<"intro" | "questions" | "reveal" | "summary">("intro")
 
     // array of the same size as the question array, containing at any time the player answer, or "unanswered"
     const [playerAnswers, setPlayerAnswers] = useState<("unanswered" | "v" | "f")[]>(data.questions.map(el => "unanswered"))
-
-    const question = data.questions[questionIndex]
 
     const rightAnswersNeeded = Math.round(data.questions.length * 2 / 3)
 
@@ -31,58 +52,54 @@ const QuizPage = ({ data }: QuizPageProps) => {
             : false
 
 
-    const answerCallback = (answer: "v" | "f") => {
-        setPlayerAnswers(answers => answers.map((el, i) => i == questionIndex
+    const answerCallback = (answer: "v" | "f", index: number) => {
+        setPlayerAnswers(answers => answers.map((el, i) => i == index
             ? answer
             : el))
-
-        if (questionIndex + 1 < data.questions.length)
-            setQuestionIndex((index) => index + 1)
-        else
-            setPhase("reveal")
     }
 
-    return <>
-        <div>{data.id}</div>
-        <div>{data.name}</div>
-        <div>
-            {phase == "intro" && <div>
-                benvenuto in quizbero!
-                <button onClick={() => setPhase("questions")}>avanti</button>
-            </div>}
+    // every time playerAnswers changes, check if there are any more questions
+    // if not, go to the reveal phase
+    useEffect(() => {
+        if (!playerAnswers.includes("unanswered")) {
+            setPhase("reveal")
+        }
+    }, [playerAnswers])
 
-            {phase == "questions" && <div>
-                <div>{question.question}</div>
-                <button onClick={() => answerCallback("v")}>vero</button>
-                <button onClick={() => answerCallback("f")}>falso</button>
-            </div>}
+    return <div style={styles.container}>
+        <h1>{data.name}</h1>
+        {phase == "intro" && <div>
+            benvenuto in quizbero!
+            <button onClick={() => setPhase("questions")}>avanti</button>
+        </div>}
+        {phase == "questions" &&
+            <>
+                <div style={styles.cardHolder}>
+                    {
+                        data.questions.map((el, i) =>
+                            playerAnswers[i] == "unanswered" && <Card
+                                key={i}
+                                question={el.question}
+                                onAnswer={(answer) => answerCallback(answer, i)}
+                                interactable={playerAnswers.lastIndexOf("unanswered") == i}
+                            />
+                        )
+                    }
+                </div>
+                <h3>{data.questions.length - playerAnswers.lastIndexOf("unanswered")} di {data.questions.length}</h3>
+            </>
+        }
 
-            {phase == "reveal" && <div>
-                {checkWin()
-                    ? <>hai vinto 😊</>
-                    : <>hai perso 😢</>}
-                <button onClick={() => {
-                    setQuestionIndex(0)
-                    setPhase("summary")
-                }}>avanti</button>
-            </div>}
-
-            {phase == "summary" && <div>
-                <div>{question.question}</div>
-                <div>la risposta era: {question.answer}</div>
-                <div>tu hai risposto: {playerAnswers[questionIndex]}</div>
-                <div>{question.funFact}</div>
-                <button onClick={() => {
-                    if (questionIndex + 1 < data.questions.length)
-                        setQuestionIndex((index) => index + 1)
-                    else
-                        setPhase("reveal")
-                }}>avanti</button>
-            </div>}
-        </div>
-    </>
+        {phase == "reveal" && <div>
+            {checkWin()
+                ? <>hai vinto 😊</>
+                : <>hai perso 😢</>}
+            <button onClick={() => {
+                setPhase("summary")
+            }}>avanti</button>
+        </div>}
+    </div>;
 }
-
 type QuizPagePaths = {
     quiz: string
 }
