@@ -5,17 +5,19 @@ import { theme } from '../src/common'
 import { GoogleFonts } from "nextjs-google-fonts/GoogleFonts";
 
 const MyApp = ({ Component, pageProps }: AppProps) => <>
-  <Head>
-    <link rel="manifest" href="/manifest.json" />
-    <link rel="apple-touch-icon" href="/icons/192.png" />
-    <meta name="theme-color" content={theme.mainColor} />
-    {GoogleFonts()}
-  </Head>
-  <Layout>
-    <style jsx global>{`
+    <Head>
+        {/* <link rel="manifest" href="/manifest.json" />
+        <link rel="apple-touch-icon" href="/icons/192.png" />
+        <meta name="theme-color" content={theme.mainColor} /> */}
+        {GoogleFonts()}
+    </Head>
+    <Layout>
+        <style jsx global>{`
             :root {
               --maincolor: ${theme.mainColor};
               --backgroundcolor: ${theme.backgroundColor};
+              --baloocolor: ${theme.balooColor};
+              --cardcolor: ${theme.cardColor};
             }
 
             #__next {
@@ -34,6 +36,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => <>
               * {
                 color: black;
                 font-family: Carme, serif;
+                box-sizing: border-box
               }
               
               h1,
@@ -41,25 +44,11 @@ const MyApp = ({ Component, pageProps }: AppProps) => <>
               h3,
               h4 {
                 font-family: 'BalooBhai2', sans-serif;
-                color: var(--maincolor);
-              }
-              
-              p,
-              ol * {
-                text-shadow:
-                    0px 0px 8px var(--backgroundcolor),
-                    0px 0px 8px var(--backgroundcolor);
-            }
-            
-            pre {
-                overflow-x: scroll;
-                background-color: #1a1a1ace;
-                padding: 2rem;
-                border-radius: 8px;
+                color: var(--baloocolor);
               }
               `}</style>
-    <Component {...pageProps} />
-  </Layout>
+        <Component {...pageProps} />
+    </Layout>
 </>
 
 export default MyApp
