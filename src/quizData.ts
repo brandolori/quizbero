@@ -1,4 +1,4 @@
-type Question = {
+export type Question = {
     question: string,
     answer: "v" | "f",
     funFact: string
@@ -16,19 +16,19 @@ const data: Quiz[] = [
         id: "0",
         questions: [
             {
-                question: "I papaveri sono alti alti alti?",
+                question: "L'Università di Bologna ricicla il 30% della carta che utilizza",
                 answer: "v",
-                funFact: "Fun fact 1!",
+                funFact: "Unibo supera la media nazionale del 20%!",
             },
             {
-                question: "Tu sei piccolina?",
+                question: "La maggior parte delle tesi non viene neanche stampata",
                 answer: "f",
-                funFact: "Fun fact 2!",
+                funFact: "Gli studenti continuano a preferire la versione cartacea della propria tesi",
             },
             {
-                question: "Sei nata paperina?",
+                question: "La dematerializzazione non ha alcun effetto benefico",
                 answer: "f",
-                funFact: "Fun fact 3!",
+                funFact: "Grazie alla dematerializzazione, unibo ha salvato 1000 alberi solo nel 2021!",
             }
         ]
     }

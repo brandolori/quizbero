@@ -14,10 +14,10 @@ const MyApp = ({ Component, pageProps }: AppProps) => <>
     <Layout>
         <style jsx global>{`
             :root {
-              --maincolor: ${theme.mainColor};
-              --backgroundcolor: ${theme.backgroundColor};
-              --baloocolor: ${theme.balooColor};
-              --cardcolor: ${theme.cardColor};
+                --maincolor: ${theme.mainColor};
+                --backgroundcolor: ${theme.backgroundColor};
+                --baloocolor: ${theme.balooColor};
+                --cardcolor: ${theme.cardColor};
             }
 
             #__next {
@@ -26,27 +26,28 @@ const MyApp = ({ Component, pageProps }: AppProps) => <>
                 bottom: 0px;
                 left: 0px;
                 right: 0px;
-              }
+            }
               
-              html {
+            html {
                 font-size: 1.25rem;
                 background-color: var(--backgroundcolor);
-              }
+            }
               
-              * {
+            * {
                 color: black;
                 font-family: Carme, serif;
-                box-sizing: border-box
-              }
-              
-              h1,
-              h2,
-              h3,
-              h4 {
+                box-sizing: border-box;
+                overflow-x: hidden;
+            }
+            
+            h1,
+            h2,
+            h3,
+            h4 {
                 font-family: 'BalooBhai2', sans-serif;
                 color: var(--baloocolor);
-              }
-              `}</style>
+            }
+            `}</style>
         <Component {...pageProps} />
     </Layout>
 </>

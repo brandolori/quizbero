@@ -1,10 +1,11 @@
 import { GetStaticPaths, GetStaticProps } from "next"
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import data, { Quiz } from "../src/quizData"
 import makeStyles from "../src/makeStyles"
 import Card from "../components/Card"
 import { commonStyles } from "../src/common"
 import Reveal from "../components/Reveal"
+import Summary from "../components/Summary"
 
 const styles = makeStyles({
     cardHolder: {
@@ -76,28 +77,31 @@ const QuizPage = ({ data }: QuizPageProps) => {
         </>}
 
 
-        {phase == "questions" &&
-            <>
+        {phase == "questions" && <>
+            <div>
                 <h1 style={styles.noMtop}>{data.name}</h1>
                 <img style={styles.cardImage} src="/img/log.png" alt="" />
-                <div style={styles.cardHolder}>
-                    {
-                        data.questions.map((el, i) =>
-                            playerAnswers[i] == "unanswered" && <Card
-                                key={i}
-                                question={el.question}
-                                onAnswer={(answer) => answerCallback(answer, i)}
-                                interactable={playerAnswers.lastIndexOf("unanswered") == i}
-                            />
-                        )
-                    }
-                </div>
-                <div style={styles.questionCounter}>{data.questions.length - playerAnswers.lastIndexOf("unanswered")} di {data.questions.length}</div>
-            </>}
-
-        {phase == "reveal" && <>
-            <Reveal result={checkWin() ? "w" : "l"} onButtonClick={() => setPhase("summary")} />
+            </div>
+            <div style={styles.cardHolder}>
+                {
+                    data.questions.map((el, i) =>
+                        playerAnswers[i] == "unanswered" && <Card
+                            key={i}
+                            question={el.question}
+                            onAnswer={(answer) => answerCallback(answer, i)}
+                            interactable={playerAnswers.lastIndexOf("unanswered") == i}
+                        />
+                    )
+                }
+            </div>
+            <div style={styles.questionCounter}>{data.questions.length - playerAnswers.lastIndexOf("unanswered")} di {data.questions.length}</div>
         </>}
+
+        {phase == "reveal" &&
+            <Reveal result={checkWin() ? "w" : "l"} onButtonClick={() => setPhase("summary")} />}
+
+        {phase == "summary" &&
+            <Summary data={data} playerAnswers={playerAnswers} />}
     </>;
 }
 

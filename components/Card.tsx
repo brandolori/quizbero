@@ -20,21 +20,21 @@ const styles = makeStyles({
     stamp: {
         borderRadius: 5,
         position: "absolute",
-        top: 100,
+        top: 66,
         fontFamily: "BalooBhai2, sans-serif",
-        lineHeight: "1.66rem",
-        fontSize: "2rem"
+        lineHeight: "1.75rem",
+        fontSize: "2.25rem"
     },
     trueStamp: {
         border: "5px solid green",
-        left: "25%",
+        left: "20%",
         //@ts-ignore
         rotate: -15,
         color: "green"
     },
     falseStamp: {
         border: "5px solid red",
-        right: "25%",
+        right: "20%",
         //@ts-ignore
         rotate: 15,
         color: "red"
@@ -72,14 +72,14 @@ const Card = (props: CardProps) => {
     );
 
     return <motion.div
-        drag={props.interactable ? "x" : false}
+        drag={props.interactable}
         dragConstraints={{ left: -1000, right: 1000 }}
         dragSnapToOrigin={true}
         style={{ ...styles.card, opacity: cardOpacity, rotate: cardRotation, x: motionValue }}
         onDragEnd={(event, info) => {
 
             //if the card is dragged over the threshold, call the callback
-            if (Math.abs(info.offset.x) > 200) {
+            if (Math.abs(info.offset.x) > 130) {
                 props.onAnswer(info.offset.x > 0 ? "v" : "f")
             }
         }}
