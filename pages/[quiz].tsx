@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import data, { Quiz } from "../src/quizData"
 import makeStyles from "../src/makeStyles"
 import Card from "../components/Card"
+import { motion, Variants } from "framer-motion"
 
 const styles = makeStyles({
     cardHolder: {
@@ -109,17 +110,60 @@ const QuizPage = ({ data }: QuizPageProps) => {
             </>}
 
         {phase == "reveal" && <>
-            <div>
-                {checkWin()
-                    ? <>hai vinto 😊</>
-                    : <>hai perso 😢</>}
-                <button onClick={() => {
-                    setPhase("summary")
-                }}>avanti</button>
-            </div>
+            <Reveal result={checkWin() ? "w" : "l"} />
         </>}
     </>;
 }
+
+const Reveal = ({ result }: { result: "w" | "l" }) => {
+    const [revealState, setRevealState] = useState<"loading" | "success" | "failure">("loading")
+    console.log("reloading with", revealState)
+    const animations: Variants = {
+        loading:
+        {
+            scale: .8,
+            scaleY: [1, .9, 1],
+            y: [0, 10, 0],
+            filter: "grayscale(50%)",
+            transition: { repeat: Infinity, repeatDelay: 1 }
+        },
+        success: {
+            scale: 1,
+            filter: "grayscale(0%)",
+        },
+        failure: {
+            scale: 1,
+            filter: "grayscale(100%)",
+        }
+    }
+
+    useEffect(() => {
+        setTimeout(() => {
+            console.log("una volta sola?")
+            setRevealState(result == "w" ? "success" : "failure")
+        }, Math.random() * 2000 + 2000)
+    }, [])
+
+    return <div style={{ margin: "auto" }}>
+        <motion.img
+            variants={animations}
+            animate={revealState}
+            initial={false}
+            src="/img/log.png" alt="" />
+        <div style={{ fontSize: "6rem" }}>
+            <motion.span
+                animate={{ opacity: [1, 0, 0, 0] }}
+                transition={{ repeat: Infinity }}>.</motion.span>
+            <motion.span
+                animate={{ opacity: [0, 1, 0, 0] }}
+                transition={{ repeat: Infinity }}>.</motion.span>
+            <motion.span
+                animate={{ opacity: [0, 0, 1, 0] }}
+                transition={{ repeat: Infinity }}>.</motion.span>
+        </div>
+    </div>
+}
+
 type QuizPagePaths = {
     quiz: string
 }
