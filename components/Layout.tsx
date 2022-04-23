@@ -5,6 +5,13 @@ const styles = makeStyles({
         minHeight: "100%",
         margin: "0 auto",
         position: "relative",
+        width: "100%",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "space-between",
+        textAlign: "center",
+        padding: "30px 0px",
     },
 })
 

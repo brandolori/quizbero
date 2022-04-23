@@ -7,7 +7,7 @@ const styles = makeStyles({
         position: "absolute",
         backgroundColor: "var(--maincolor)",
         width: "100%",
-        height: 400,
+        height: 350,
         borderRadius: 40,
         padding: 40,
         boxShadow: "0 8px 8px -4px grey",

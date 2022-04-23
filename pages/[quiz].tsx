@@ -8,21 +8,34 @@ const styles = makeStyles({
     cardHolder: {
         position: "relative",
         width: "80%",
-        height: 400,
+        height: 350,
         overflow: "visible",
-        marginX: "auto",
+        margin: 40
     },
-    container: {
-        position: "absolute",
-        top: 0,
-        left: 0,
-        bottom: 0,
-        right: 0,
+    orangeButton: {
+        backgroundColor: "var(--maincolor)",
+        borderRadius: 40,
+        padding: 30,
+        border: "none",
+        boxShadow: "0 8px 8px -4px grey",
+        fontSize: "1.5rem",
+        lineHeight: "1.5rem",
         display: "flex",
-        flexDirection: "column",
         alignItems: "center",
-        justifyContent: "space-between",
-        minHeight: "100%"
+        justifyContent: "center",
+        textAlign: "center",
+        fontFamily: "BalooBhai2, sans-serif",
+        color: "#3f3f3f",
+    },
+    noMtop: { marginTop: 0 },
+    cardImage: {
+        margin: 0,
+        height: 100
+    },
+    questionCounter: {
+        fontFamily: "BalooBhai2, sans-serif",
+        marginBottom: 0,
+        fontSize: "1.25rem"
     }
 })
 
@@ -64,14 +77,22 @@ const QuizPage = ({ data }: QuizPageProps) => {
         }
     }, [playerAnswers])
 
-    return <div style={styles.container}>
-        <h1>{data.name}</h1>
-        {phase == "intro" && <div>
-            benvenuto in quizbero!
-            <button onClick={() => setPhase("questions")}>avanti</button>
-        </div>}
+    return <>
+        {phase == "intro" && <>
+            <h1 style={styles.noMtop}>Hai trovato un Quizbero!</h1>
+            <div>
+                <img src="/img/log.png" alt="" />
+                <h2>Quercia verde</h2>
+            </div>
+
+            <button style={styles.orangeButton} onClick={() => setPhase("questions")}>AFFRONTALO!</button>
+        </>}
+
+
         {phase == "questions" &&
             <>
+                <h1 style={styles.noMtop}>{data.name}</h1>
+                <img style={styles.cardImage} src="/img/log.png" alt="" />
                 <div style={styles.cardHolder}>
                     {
                         data.questions.map((el, i) =>
@@ -84,19 +105,20 @@ const QuizPage = ({ data }: QuizPageProps) => {
                         )
                     }
                 </div>
-                <h3>{data.questions.length - playerAnswers.lastIndexOf("unanswered")} di {data.questions.length}</h3>
-            </>
-        }
+                <div style={styles.questionCounter}>{data.questions.length - playerAnswers.lastIndexOf("unanswered")} di {data.questions.length}</div>
+            </>}
 
-        {phase == "reveal" && <div>
-            {checkWin()
-                ? <>hai vinto 😊</>
-                : <>hai perso 😢</>}
-            <button onClick={() => {
-                setPhase("summary")
-            }}>avanti</button>
-        </div>}
-    </div>;
+        {phase == "reveal" && <>
+            <div>
+                {checkWin()
+                    ? <>hai vinto 😊</>
+                    : <>hai perso 😢</>}
+                <button onClick={() => {
+                    setPhase("summary")
+                }}>avanti</button>
+            </div>
+        </>}
+    </>;
 }
 type QuizPagePaths = {
     quiz: string
