@@ -1,3 +1,5 @@
+import makeStyles from "./makeStyles"
+
 const theme = {
     mainColor: "#d7ebba",
     backgroundColor: "#9ad2cb",
@@ -7,4 +9,22 @@ const theme = {
 
 const normalize = (value: number, range: number) => ((value - (range / 2)) / (range / 2))
 
-export { theme, normalize }
+const commonStyles = makeStyles({
+    orangeButton: {
+        backgroundColor: "var(--maincolor)",
+        borderRadius: 40,
+        padding: 30,
+        border: "none",
+        boxShadow: "0 8px 8px -4px grey",
+        fontSize: "1.5rem",
+        lineHeight: "1.5rem",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        textAlign: "center",
+        fontFamily: "BalooBhai2, sans-serif",
+        color: "#3f3f3f",
+    },
+})
+
+export { theme, normalize, commonStyles }

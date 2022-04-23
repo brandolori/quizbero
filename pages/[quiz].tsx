@@ -3,7 +3,8 @@ import { useEffect, useState } from "react"
 import data, { Quiz } from "../src/quizData"
 import makeStyles from "../src/makeStyles"
 import Card from "../components/Card"
-import { motion, Variants } from "framer-motion"
+import { commonStyles } from "../src/common"
+import Reveal from "../components/Reveal"
 
 const styles = makeStyles({
     cardHolder: {
@@ -12,21 +13,6 @@ const styles = makeStyles({
         height: 350,
         overflow: "visible",
         margin: 40
-    },
-    orangeButton: {
-        backgroundColor: "var(--maincolor)",
-        borderRadius: 40,
-        padding: 30,
-        border: "none",
-        boxShadow: "0 8px 8px -4px grey",
-        fontSize: "1.5rem",
-        lineHeight: "1.5rem",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        textAlign: "center",
-        fontFamily: "BalooBhai2, sans-serif",
-        color: "#3f3f3f",
     },
     noMtop: { marginTop: 0 },
     cardImage: {
@@ -86,7 +72,7 @@ const QuizPage = ({ data }: QuizPageProps) => {
                 <h2>Quercia verde</h2>
             </div>
 
-            <button style={styles.orangeButton} onClick={() => setPhase("questions")}>AFFRONTALO!</button>
+            <button style={commonStyles.orangeButton} onClick={() => setPhase("questions")}>AFFRONTALO!</button>
         </>}
 
 
@@ -113,84 +99,6 @@ const QuizPage = ({ data }: QuizPageProps) => {
             <Reveal result={checkWin() ? "w" : "l"} onButtonClick={() => setPhase("summary")} />
         </>}
     </>;
-}
-
-const Reveal = ({ result, onButtonClick }: { result: "w" | "l", onButtonClick: () => void }) => {
-    const [revealState, setRevealState] = useState<"loading" | "success" | "failure">("loading")
-    console.log("reloading with", revealState)
-    const logAnimations: Variants = {
-        loading: {
-            scale: .8,
-            scaleY: [1, .9, 1],
-            y: [0, 10, 0],
-            filter: "grayscale(50%)",
-            transition: { repeat: Infinity, repeatDelay: 1 }
-        },
-        success: {
-            scale: 1,
-            filter: "grayscale(0%)",
-        },
-        failure: {
-            scale: 1,
-            filter: "grayscale(100%)",
-        }
-    }
-    const uiAnimations: Variants = {
-        loading: {
-            opacity: 0,
-        },
-        success: {
-            scale: [1.1, 1],
-            opacity: 1
-        },
-        failure: {
-            scale: [1.1, 1],
-            opacity: 1
-        }
-    }
-
-    useEffect(() => {
-        setTimeout(() => {
-            console.log("una volta sola?")
-            setRevealState(result == "w" ? "success" : "failure")
-        }, Math.random() * 2000 + 2000)
-    }, [])
-
-    return <>
-        <motion.h1
-            variants={uiAnimations}
-            animate={revealState}
-            initial={false}
-        >{result == "w"
-            ? "Quizbero completato!"
-            : "Quizbero fallito..."}</motion.h1>
-
-        <div style={{ margin: "auto" }}>
-            <motion.img
-                variants={logAnimations}
-                animate={revealState}
-                initial="loading"
-                src="/img/log.png" alt="" />
-            <div style={{ fontSize: "6rem", opacity: revealState == "loading" ? 1 : 0 }}>
-                <motion.span
-                    animate={{ opacity: [1, 0, 0, 0] }}
-                    transition={{ repeat: Infinity }}>.</motion.span>
-                <motion.span
-                    animate={{ opacity: [0, 1, 0, 0] }}
-                    transition={{ repeat: Infinity }}>.</motion.span>
-                <motion.span
-                    animate={{ opacity: [0, 0, 1, 0] }}
-                    transition={{ repeat: Infinity }}>.</motion.span>
-            </div>
-        </div>
-
-        <motion.button
-            variants={uiAnimations}
-            animate={revealState}
-            initial={false}
-            style={styles.orangeButton} onClick={onButtonClick}>AVANTI
-        </motion.button>
-    </>
 }
 
 type QuizPagePaths = {
