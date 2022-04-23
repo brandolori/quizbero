@@ -110,17 +110,16 @@ const QuizPage = ({ data }: QuizPageProps) => {
             </>}
 
         {phase == "reveal" && <>
-            <Reveal result={checkWin() ? "w" : "l"} />
+            <Reveal result={checkWin() ? "w" : "l"} onButtonClick={() => setPhase("summary")} />
         </>}
     </>;
 }
 
-const Reveal = ({ result }: { result: "w" | "l" }) => {
+const Reveal = ({ result, onButtonClick }: { result: "w" | "l", onButtonClick: () => void }) => {
     const [revealState, setRevealState] = useState<"loading" | "success" | "failure">("loading")
     console.log("reloading with", revealState)
-    const animations: Variants = {
-        loading:
-        {
+    const logAnimations: Variants = {
+        loading: {
             scale: .8,
             scaleY: [1, .9, 1],
             y: [0, 10, 0],
@@ -136,6 +135,19 @@ const Reveal = ({ result }: { result: "w" | "l" }) => {
             filter: "grayscale(100%)",
         }
     }
+    const uiAnimations: Variants = {
+        loading: {
+            opacity: 0,
+        },
+        success: {
+            scale: [1.1, 1],
+            opacity: 1
+        },
+        failure: {
+            scale: [1.1, 1],
+            opacity: 1
+        }
+    }
 
     useEffect(() => {
         setTimeout(() => {
@@ -144,24 +156,41 @@ const Reveal = ({ result }: { result: "w" | "l" }) => {
         }, Math.random() * 2000 + 2000)
     }, [])
 
-    return <div style={{ margin: "auto" }}>
-        <motion.img
-            variants={animations}
+    return <>
+        <motion.h1
+            variants={uiAnimations}
             animate={revealState}
             initial={false}
-            src="/img/log.png" alt="" />
-        <div style={{ fontSize: "6rem" }}>
-            <motion.span
-                animate={{ opacity: [1, 0, 0, 0] }}
-                transition={{ repeat: Infinity }}>.</motion.span>
-            <motion.span
-                animate={{ opacity: [0, 1, 0, 0] }}
-                transition={{ repeat: Infinity }}>.</motion.span>
-            <motion.span
-                animate={{ opacity: [0, 0, 1, 0] }}
-                transition={{ repeat: Infinity }}>.</motion.span>
+        >{result == "w"
+            ? "Quizbero completato!"
+            : "Quizbero fallito..."}</motion.h1>
+
+        <div style={{ margin: "auto" }}>
+            <motion.img
+                variants={logAnimations}
+                animate={revealState}
+                initial="loading"
+                src="/img/log.png" alt="" />
+            <div style={{ fontSize: "6rem", opacity: revealState == "loading" ? 1 : 0 }}>
+                <motion.span
+                    animate={{ opacity: [1, 0, 0, 0] }}
+                    transition={{ repeat: Infinity }}>.</motion.span>
+                <motion.span
+                    animate={{ opacity: [0, 1, 0, 0] }}
+                    transition={{ repeat: Infinity }}>.</motion.span>
+                <motion.span
+                    animate={{ opacity: [0, 0, 1, 0] }}
+                    transition={{ repeat: Infinity }}>.</motion.span>
+            </div>
         </div>
-    </div>
+
+        <motion.button
+            variants={uiAnimations}
+            animate={revealState}
+            initial={false}
+            style={styles.orangeButton} onClick={onButtonClick}>AVANTI
+        </motion.button>
+    </>
 }
 
 type QuizPagePaths = {
