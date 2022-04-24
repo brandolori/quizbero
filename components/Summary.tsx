@@ -3,13 +3,6 @@ import makeStyles from "../src/makeStyles"
 import { Quiz } from "../src/quizData"
 
 const styles = makeStyles({
-    cardHolder: {
-        position: "relative",
-        width: "80%",
-        height: 350,
-        overflow: "visible",
-        margin: 40
-    },
     noMtop: { marginTop: 0 },
     cardImage: {
         margin: 0,
@@ -67,25 +60,6 @@ const styles = makeStyles({
         alignItems: "stretch",
         position: "absolute",
         top: 7, left: 40, right: 40, height: 3
-    },
-    stamp: {
-        borderRadius: 5,
-        fontFamily: "BalooBhai2, sans-serif",
-        lineHeight: "1.66rem",
-        fontSize: "2rem",
-        marginLeft: "auto",
-        marginRight: "auto",
-        width: 100,
-        marginBottom: 10,
-        overflowY: "hidden",
-    },
-    trueStamp: {
-        border: "5px solid green",
-        color: "green"
-    },
-    falseStamp: {
-        border: "5px solid red",
-        color: "red"
     }
 })
 
@@ -101,7 +75,6 @@ const Summary = ({ data, playerAnswers }: { data: Quiz, playerAnswers: ("unanswe
 
         <div ref={summaryCardRef} style={styles.summaryCard} onClick={(ev) => {
             const clickPercent = (ev.clientX - summaryCardRef.current.getBoundingClientRect().left) / summaryCardRef.current.offsetWidth
-            console.log(clickPercent)
             if (clickPercent < .3)
                 setQuestionIndex((index) => Math.min(data.questions.length - 1, index + 1))
             if (clickPercent > .6)
@@ -114,7 +87,6 @@ const Summary = ({ data, playerAnswers }: { data: Quiz, playerAnswers: ("unanswe
 
             <div style={styles.topSummaryCard}>
                 <div>
-
                     {data.questions[index].question}
                 </div>
                 <div>

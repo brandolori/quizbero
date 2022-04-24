@@ -70,7 +70,7 @@ const QuizPage = ({ data }: QuizPageProps) => {
             <h1 style={styles.noMtop}>Hai trovato un Quizbero!</h1>
             <div>
                 <img draggable="false" src="/img/log.png" alt="" />
-                <h2>Quercia verde</h2>
+                <h2>{data.name}</h2>
             </div>
 
             <button style={commonStyles.orangeButton} onClick={() => setPhase("questions")}>AFFRONTALO!</button>
