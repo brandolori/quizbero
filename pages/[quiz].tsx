@@ -101,7 +101,7 @@ const QuizPage = ({ data }: QuizPageProps) => {
             <Reveal result={checkWin() ? "w" : "l"} onButtonClick={() => setPhase("summary")} />}
 
         {phase == "summary" &&
-            <Summary data={data} playerAnswers={playerAnswers} />}
+            <Summary data={data} playerAnswers={playerAnswers} success={checkWin()} />}
     </>;
 }
 

@@ -1,4 +1,5 @@
-import { useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
+import { calculateXP, getUserData, setUserData } from "../src/common"
 import makeStyles from "../src/makeStyles"
 import { Quiz } from "../src/quizData"
 
@@ -63,7 +64,7 @@ const styles = makeStyles({
     }
 })
 
-const Summary = ({ data, playerAnswers }: { data: Quiz, playerAnswers: ("unanswered" | "v" | "f")[] }) => {
+const Summary = ({ data, playerAnswers, success }: { data: Quiz, playerAnswers: ("unanswered" | "v" | "f")[], success: boolean }) => {
     const [index, setQuestionIndex] = useState(data.questions.length - 1)
 
     const summaryCardRef = useRef<HTMLDivElement>()
@@ -78,30 +79,124 @@ const Summary = ({ data, playerAnswers }: { data: Quiz, playerAnswers: ("unanswe
             if (clickPercent < .3)
                 setQuestionIndex((index) => Math.min(data.questions.length - 1, index + 1))
             if (clickPercent > .6)
-                setQuestionIndex((index) => Math.max(0, index - 1))
+                setQuestionIndex((index) => Math.max(-1, index - 1))
         }}>
             <div style={styles.storyIndexHolder}>
 
-                {data.questions.map((el, i) => <div key={i} style={{ backgroundColor: index == i ? "black" : "white", flex: 1, marginLeft: 5, marginRight: 5 }} />)}
+                {Array.from(Array(data.questions.length + 1))
+                    .map((el, i) =>
+                        <div
+                            key={i - 1}
+                            style={{
+                                backgroundColor: index == i - 1 ? "black" : "white",
+                                flex: 1,
+                                marginLeft: 5,
+                                marginRight: 5
+                            }}
+                        />)}
             </div>
 
-            <div style={styles.topSummaryCard}>
-                <div>
-                    {data.questions[index].question}
+            {index != -1 && <>
+                <div style={styles.topSummaryCard}>
+                    <div>
+                        {data.questions[index].question}
+                    </div>
+                    <div>
+                        Hai risposto: {playerAnswers[index] == "v" ? "vero" : "falso"}
+                    </div>
+                    <img draggable="false" height={50} src={data.questions[index].answer == playerAnswers[index] ? "/img/check.png" : "/img/cross.png"} alt="" />
                 </div>
-                <div>
-                    Hai risposto: {playerAnswers[index] == "v" ? "vero" : "falso"}
+
+                <div style={styles.bottomSummaryCard}>
+
+                    {data.questions[index].funFact}
                 </div>
-                <img draggable="false" height={50} src={data.questions[index].answer == playerAnswers[index] ? "/img/check.png" : "/img/cross.png"} alt="" />
-            </div>
+            </>}
 
-            <div style={styles.bottomSummaryCard}>
-
-                {data.questions[index].funFact}
-            </div>
-
+            {index == -1 && <div style={{
+                width: "100%",
+                height: "100%",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "space-between",
+                textAlign: "center",
+                padding: 40
+            }}>
+                <h2 style={{ fontSize: "1.8rem", lineHeight: "2rem" }}>
+                    {success
+                        ? "Hai completato il Quizbero!"
+                        : "Ritenta..."
+                    }
+                </h2>
+                <ExperienceBar id={data.id} success={success} />
+                <div>
+                    <a style={{ display: "block", fontFamily: "BalooBhai2, sans-serif", fontSize: "2rem", textDecoration: "underline black" }}>Condividi</a>
+                    <a style={{ display: "block", fontFamily: "BalooBhai2, sans-serif", fontSize: "1.25rem", textDecoration: "underline black" }}>Vai al profilo</a>
+                </div>
+            </div>}
         </div>
     </>
+}
+
+const ExperienceBar = ({ id, success }: { id: string, success: boolean }) => {
+
+    const userData = getUserData()
+    const completedQuizzes = userData.completedQuizzes
+
+    const savedXp = calculateXP(completedQuizzes.length)
+
+    const [xp, setXp] = useState(savedXp)
+    const [animate, setAnimate] = useState(true)
+    const barPercent = xp % 1000 / 10
+    const level = Math.floor(xp / 1000)
+
+    const fakeDeltaXp = success ? 200 : 0
+
+    if (success)
+        // add the quiz id to the array if not present already
+        if (!completedQuizzes.includes(id))
+            completedQuizzes.push(id)
+
+    setUserData({ ...userData, completedQuizzes })
+
+    const newXp = calculateXP(completedQuizzes.length)
+    const newLevel = Math.floor(newXp / 1000)
+
+
+    useEffect(() => {
+        if (newXp != xp) {
+            if (newLevel != level) {
+                // first animate up to the end of the current level
+                setXp(level * 1000 + 999)
+
+                setTimeout(() => {
+                    // then reset the bar at the start of the next level
+                    setAnimate(false)
+                    setXp(newLevel * 1000)
+
+                    setTimeout(() => {
+                        // then animate up to the new xp level
+                        setAnimate(true)
+                        setXp(newXp)
+                    }, 200);
+                }, 1000);
+            } else {
+                setXp(newXp)
+            }
+        }
+    }, [])
+
+
+    return <div style={{ width: "100%", display: "flex", flexDirection: "column", alignItems: "center" }}>
+        <div>+{fakeDeltaXp}xp</div>
+        <div style={{ width: "90%", height: 30, backgroundColor: "#385682", borderRadius: 100, overflow: "hidden" }}>
+            <div style={{ transition: animate ? "all 1s" : "none", width: barPercent + "%", height: 30, backgroundColor: "#5297ff", borderRadius: 100 }}>
+
+            </div>
+        </div>
+        <div>Livello {level}</div>
+    </div>
 }
 
 export default Summary

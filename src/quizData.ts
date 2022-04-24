@@ -31,7 +31,70 @@ const data: Quiz[] = [
                 funFact: "Grazie alla dematerializzazione, unibo ha salvato 1000 alberi solo nel 2021!",
             }
         ]
-    }
+    },
+    {
+        name: "Abete verde",
+        id: "1",
+        questions: [
+            {
+                question: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+                answer: "v",
+                funFact: "Unibo supera la media nazionale del 20%!",
+            },
+            {
+                question: "sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam",
+                answer: "f",
+                funFact: "Gli studenti continuano a preferire la versione cartacea della propria tesi",
+            },
+            {
+                question: "quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat",
+                answer: "f",
+                funFact: "Grazie alla dematerializzazione, unibo ha salvato 1000 alberi solo nel 2021!",
+            }
+        ]
+    },
+    {
+        name: "Abete giallo",
+        id: "2",
+        questions: [
+            {
+                question: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+                answer: "v",
+                funFact: "Unibo supera la media nazionale del 20%!",
+            },
+            {
+                question: "sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam",
+                answer: "f",
+                funFact: "Gli studenti continuano a preferire la versione cartacea della propria tesi",
+            },
+            {
+                question: "quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat",
+                answer: "f",
+                funFact: "Grazie alla dematerializzazione, unibo ha salvato 1000 alberi solo nel 2021!",
+            }
+        ]
+    },
+    {
+        name: "Pino blu",
+        id: "3",
+        questions: [
+            {
+                question: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+                answer: "v",
+                funFact: "Unibo supera la media nazionale del 20%!",
+            },
+            {
+                question: "sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam",
+                answer: "f",
+                funFact: "Gli studenti continuano a preferire la versione cartacea della propria tesi",
+            },
+            {
+                question: "quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat",
+                answer: "f",
+                funFact: "Grazie alla dematerializzazione, unibo ha salvato 1000 alberi solo nel 2021!",
+            }
+        ]
+    },
 ]
 
 export default data

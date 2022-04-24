@@ -7,7 +7,17 @@ const theme = {
     balooColor: "#3f3f3f"
 }
 
-const normalize = (value: number, range: number) => ((value - (range / 2)) / (range / 2))
+const calculateXP = (completedQuizzes: number) => 1000 * Math.sqrt(3 * completedQuizzes)
+
+type UserData = {
+    completedQuizzes: string[]
+}
+
+const getUserData = (): UserData => JSON.parse(localStorage.getItem("userdata")) ?? { completedQuizzes: [] }
+
+const setUserData = (data: UserData) => {
+    localStorage.setItem("userdata", JSON.stringify(data))
+}
 
 const commonStyles = makeStyles({
     orangeButton: {
@@ -27,4 +37,4 @@ const commonStyles = makeStyles({
     },
 })
 
-export { theme, normalize, commonStyles }
+export { theme, commonStyles, calculateXP, getUserData, setUserData }

@@ -22,9 +22,9 @@ const Layout = (props) => {
 
         <style jsx>
             {`
-            @media (min-width: 768px) {
+            @media (min-width: 576px) {
                 .container {
-                    max-width: 768px;
+                    max-width: 576px;
                 }
             }
             `}</style>
