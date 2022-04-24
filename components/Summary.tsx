@@ -115,13 +115,9 @@ const Summary = ({ data, playerAnswers }: { data: Quiz, playerAnswers: ("unanswe
                     {data.questions[index].question}
                 </div>
                 <div>
-                    <div style={{ ...styles.stamp, ...(data.questions[index].answer == "v" ? styles.trueStamp : styles.falseStamp) }}>
-                        {data.questions[index].answer == "v" ? "vero" : "falso"}
-                    </div>
-                    <div>
-                        {data.questions[index].answer == playerAnswers[index] ? "😊" : "😢"} Hai risposto: {playerAnswers[index] == "v" ? "vero" : "falso"}
-                    </div>
+                    Hai risposto: {playerAnswers[index] == "v" ? "vero" : "falso"}
                 </div>
+                <img height={50} src={data.questions[index].answer == playerAnswers[index] ? "/img/check.png" : "/img/cross.png"} alt="" />
             </div>
             <div style={styles.bottomSummaryCard}>
 
