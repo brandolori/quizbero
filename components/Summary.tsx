@@ -30,7 +30,7 @@ const styles = makeStyles({
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        textAlign: "center"
+        textAlign: "center",
     },
     topSummaryCard: {
         position: "absolute",
@@ -96,10 +96,12 @@ const Summary = ({ data, playerAnswers }: { data: Quiz, playerAnswers: ("unanswe
     return <>
         <div>
             <h1 style={styles.noMtop}>{data.name}</h1>
-            <img style={styles.cardImage} src="/img/log.png" alt="" />
+            <img draggable="false" style={styles.cardImage} src="/img/log.png" alt="" />
         </div>
+
         <div ref={summaryCardRef} style={styles.summaryCard} onClick={(ev) => {
-            const clickPercent = (ev.clientX - summaryCardRef.current.offsetLeft) / summaryCardRef.current.offsetWidth
+            const clickPercent = (ev.clientX - summaryCardRef.current.getBoundingClientRect().left) / summaryCardRef.current.offsetWidth
+            console.log(clickPercent)
             if (clickPercent < .3)
                 setQuestionIndex((index) => Math.min(data.questions.length - 1, index + 1))
             if (clickPercent > .6)
@@ -109,6 +111,7 @@ const Summary = ({ data, playerAnswers }: { data: Quiz, playerAnswers: ("unanswe
 
                 {data.questions.map((el, i) => <div key={i} style={{ backgroundColor: index == i ? "black" : "white", flex: 1, marginLeft: 5, marginRight: 5 }} />)}
             </div>
+
             <div style={styles.topSummaryCard}>
                 <div>
 
@@ -117,8 +120,9 @@ const Summary = ({ data, playerAnswers }: { data: Quiz, playerAnswers: ("unanswe
                 <div>
                     Hai risposto: {playerAnswers[index] == "v" ? "vero" : "falso"}
                 </div>
-                <img height={50} src={data.questions[index].answer == playerAnswers[index] ? "/img/check.png" : "/img/cross.png"} alt="" />
+                <img draggable="false" height={50} src={data.questions[index].answer == playerAnswers[index] ? "/img/check.png" : "/img/cross.png"} alt="" />
             </div>
+
             <div style={styles.bottomSummaryCard}>
 
                 {data.questions[index].funFact}

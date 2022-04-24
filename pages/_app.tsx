@@ -37,7 +37,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => <>
                 color: black;
                 font-family: Carme, serif;
                 box-sizing: border-box;
-                overflow-x: hidden;
+                user-select: none;
             }
             
             h1,

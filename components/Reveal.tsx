@@ -4,7 +4,6 @@ import { commonStyles } from "../src/common"
 
 const Reveal = ({ result, onButtonClick }: { result: "w" | "l", onButtonClick: () => void }) => {
     const [revealState, setRevealState] = useState<"loading" | "success" | "failure">("loading")
-    console.log("reloading with", revealState)
     const logAnimations: Variants = {
         loading: {
             scale: .8,
@@ -38,7 +37,6 @@ const Reveal = ({ result, onButtonClick }: { result: "w" | "l", onButtonClick: (
 
     useEffect(() => {
         setTimeout(() => {
-            console.log("una volta sola?")
             setRevealState(result == "w" ? "success" : "failure")
         }, Math.random() * 2000 + 2000)
     }, [])
@@ -54,6 +52,7 @@ const Reveal = ({ result, onButtonClick }: { result: "w" | "l", onButtonClick: (
 
         <div style={{ margin: "auto" }}>
             <motion.img
+                draggable="false"
                 variants={logAnimations}
                 animate={revealState}
                 initial="loading"

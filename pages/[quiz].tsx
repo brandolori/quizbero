@@ -69,7 +69,7 @@ const QuizPage = ({ data }: QuizPageProps) => {
         {phase == "intro" && <>
             <h1 style={styles.noMtop}>Hai trovato un Quizbero!</h1>
             <div>
-                <img src="/img/log.png" alt="" />
+                <img draggable="false" src="/img/log.png" alt="" />
                 <h2>Quercia verde</h2>
             </div>
 
@@ -80,7 +80,7 @@ const QuizPage = ({ data }: QuizPageProps) => {
         {phase == "questions" && <>
             <div>
                 <h1 style={styles.noMtop}>{data.name}</h1>
-                <img style={styles.cardImage} src="/img/log.png" alt="" />
+                <img draggable="false" style={styles.cardImage} src="/img/log.png" alt="" />
             </div>
             <div style={styles.cardHolder}>
                 {

@@ -12,6 +12,7 @@ const styles = makeStyles({
         justifyContent: "space-between",
         textAlign: "center",
         padding: "30px 0px",
+        overflow: "hidden",
     },
 })
 
