@@ -132,7 +132,15 @@ const Summary = ({ data, playerAnswers, success }: { data: Quiz, playerAnswers: 
                 </h2>
                 <ExperienceBar id={data.id} success={success} />
                 <div>
-                    <a style={{ display: "block", fontFamily: "'Baloo 2', sans-serif", fontSize: "2rem", textDecoration: "underline black" }}>Condividi</a>
+                    <a onClick={async () => {
+                        try {
+                            await navigator.share({
+                                text: success
+                                    ? 'Ho appena completato un Quizbero! Riesci a battermi? Scoprilo su quizbero.it'
+                                    : 'Non sono riuscito a completare un Quizbero! Riesci a darmi una mano? Scoprilo su quizbero.it'
+                            })
+                        } catch (e) { }
+                    }} style={{ display: "block", fontFamily: "'Baloo 2', sans-serif", fontSize: "2rem", textDecoration: "underline black" }}>Condividi</a>
                     <Link href="/profile">
                         <a style={{ display: "block", fontFamily: "'Baloo 2', sans-serif", fontSize: "1.25rem", textDecoration: "underline black" }}>Vai al profilo</a>
                     </Link>

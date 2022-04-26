@@ -101,6 +101,10 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
                 font-family: 'Baloo 2', cursive;
                 color: var(--baloocolor);
             }
+
+            button, a {
+                cursor: pointer;
+            }
             `}</style>
             <div style={{ ...styles.archievement, opacity: showArchievement ? 1 : 0, transition: "all 1s" }}>
                 <img style={{ marginRight: 15 }} width={30} height={30} src="/img/check.png" alt="" />

@@ -64,7 +64,11 @@ const Home = () => {
             <strong style={{ userSelect: "text" }}>ae3a7694</strong>
         </div>
 
-        <button style={commonStyles.orangeButton}>COPIA</button>
+        <button onClick={async () => {
+            try {
+                await navigator.clipboard.writeText("ae3a7694")
+            } catch (e) { }
+        }} style={commonStyles.orangeButton}>COPIA</button>
         <button style={commonStyles.orangeButton}>INSERISCI</button>
 
         <h2>Obiettivi</h2>
