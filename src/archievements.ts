@@ -1,13 +1,23 @@
 const archievementData = [
     {
-        name: "Raggiungi il livello 2",
-        id: "0"
+        name: "Raggiungi il livello 2!",
+        id: "lvl2"
+    },
+    {
+        name: "Raggiungi il livello 3!",
+        id: "lvl3"
+    },
+    {
+        name: "Riscatta un codice bonus!",
+        id: "bonuscode"
     },
 ]
 
+const localStorageKey = "archievements"
+
 let callback = (name: string) => { }
 
-const readLocalStorage = () => JSON.parse(localStorage.getItem("archievements")) as string[] ?? []
+const readLocalStorage = () => JSON.parse(localStorage.getItem(localStorageKey)) as string[] ?? []
 
 const getArchievements = () => {
     const unlocked = readLocalStorage()
@@ -24,7 +34,7 @@ const unlockArchievement = (id: string) => {
     if (!unlocked.includes(id)) {
 
         unlocked.push(id)
-        localStorage.setItem("archievements", JSON.stringify(unlocked))
+        localStorage.setItem(localStorageKey, JSON.stringify(unlocked))
         callback(archievementData.find(el => el.id == id).name)
     }
 

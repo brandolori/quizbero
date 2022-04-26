@@ -1,8 +1,8 @@
 import Link from "next/link"
 import { useEffect, useRef, useState } from "react"
-import { calculateXP, getUserData, setUserData } from "../src/common"
+import { calculateXP, getCompletedQuizzes, setCompletedQuizzes } from "../src/quizzes"
 import makeStyles from "../src/makeStyles"
-import { Quiz } from "../src/quizData"
+import { Quiz } from "../src/quizzes"
 
 const styles = makeStyles({
     noMtop: { marginTop: 0 },
@@ -144,8 +144,7 @@ const Summary = ({ data, playerAnswers, success }: { data: Quiz, playerAnswers: 
 
 const ExperienceBar = ({ id, success }: { id: string, success: boolean }) => {
 
-    const userData = getUserData()
-    const completedQuizzes = userData.completedQuizzes
+    const completedQuizzes = getCompletedQuizzes()
 
     const savedXp = calculateXP(completedQuizzes.length)
 
@@ -161,7 +160,7 @@ const ExperienceBar = ({ id, success }: { id: string, success: boolean }) => {
         if (!completedQuizzes.includes(id))
             completedQuizzes.push(id)
 
-    setUserData({ ...userData, completedQuizzes })
+    setCompletedQuizzes(completedQuizzes)
 
     const newXp = calculateXP(completedQuizzes.length)
     const newLevel = Math.floor(newXp / 1000)

@@ -1,11 +1,61 @@
 import type { AppProps } from 'next/app'
-import Head from 'next/head'
+import { useEffect, useState } from 'react'
 import Layout from '../components/Layout'
+import { registerOrReplaceArchievementsListener } from '../src/archievements'
 import { theme } from '../src/common'
+import makeStyles from '../src/makeStyles'
 
-const MyApp = ({ Component, pageProps }: AppProps) => <>
-    <Layout>
-        <style jsx global>{`
+const styles = makeStyles({
+    archievement: {
+        backgroundColor: "var(--cardcolor)",
+        borderRadius: 20,
+        padding: 30,
+        border: "none",
+        boxShadow: "0 8px 8px -4px grey",
+        lineHeight: "1.5rem",
+        display: "flex",
+        fontWeight: "bold",
+        margin: "10px 0px",
+        alignItems: "center",
+        textAlign: "start",
+        position: "fixed",
+        top: 50,
+        left: 20,
+        right: 20,
+    }
+})
+
+const Archievement = ({ desc }: { desc: string }) => <div style={styles.archievement}>
+    <img style={{ marginRight: 15 }} width={30} height={30} src="/img/check.png" alt="" />
+    <div>
+
+        <small style={{ fontWeight: "normal" }}>
+            Archievement sbloccato!
+        </small>
+        <div>
+
+            {desc}
+        </div>
+    </div>
+</div>
+
+const MyApp = ({ Component, pageProps }: AppProps) => {
+
+    const [archievement, setArchievement] = useState("")
+    const [showArchievement, setShowArchievement] = useState(false)
+    useEffect(() => {
+        registerOrReplaceArchievementsListener((name) => {
+            setArchievement(name)
+            setShowArchievement(true)
+            setTimeout(() => {
+                setShowArchievement(false)
+            }, 5000)
+        })
+    })
+
+    return <>
+        <Layout>
+            <style jsx global>{`
             :root {
                 --maincolor: ${theme.mainColor};
                 --backgroundcolor: ${theme.backgroundColor};
@@ -52,8 +102,22 @@ const MyApp = ({ Component, pageProps }: AppProps) => <>
                 color: var(--baloocolor);
             }
             `}</style>
-        <Component {...pageProps} />
-    </Layout>
-</>
+            <div style={{ ...styles.archievement, opacity: showArchievement ? 1 : 0, transition: "all 1s" }}>
+                <img style={{ marginRight: 15 }} width={30} height={30} src="/img/check.png" alt="" />
+                <div>
+
+                    <small style={{ fontWeight: "normal" }}>
+                        Archievement sbloccato!
+                    </small>
+                    <div>
+
+                        {archievement}
+                    </div>
+                </div>
+            </div>
+            <Component {...pageProps} />
+        </Layout>
+    </>
+}
 
 export default MyApp

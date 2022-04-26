@@ -1,6 +1,8 @@
-import dynamic from 'next/dynamic'
+import { useEffect, useState } from 'react'
+import { getArchievements } from '../src/archievements'
 import { commonStyles } from '../src/common'
 import makeStyles from '../src/makeStyles'
+import { calculateXP, getCompletedQuizzes } from '../src/quizzes'
 
 const styles = makeStyles({
     archievement: {
@@ -19,9 +21,22 @@ const styles = makeStyles({
     }
 })
 
-const ArchievementsList = dynamic(() => import("../components/ArchievementsList"), { ssr: false })
+const Archievement = ({ completed, desc }: { completed: boolean, desc: string }) => <div style={styles.archievement}>
+    <img style={{ marginRight: 15 }} width={30} height={30} src={completed ? "/img/check.png" : "/img/cross.png"} alt="" />
+    {desc}
+</div>
 
 const Home = () => {
+
+    const [browser, setBrowser] = useState(false)
+
+    useEffect(() => {
+        setBrowser(true)
+    })
+
+    const xp = browser
+        ? calculateXP(getCompletedQuizzes().length)
+        : 0
 
     return <div style={{
         margin: "0px 40px",
@@ -36,11 +51,11 @@ const Home = () => {
 
         <div style={{ margin: "30px 0px", width: "100%", display: "flex", flexDirection: "column", alignItems: "center" }}>
             <div style={{ width: "90%", height: 30, backgroundColor: "#385682", borderRadius: 100, overflow: "hidden" }}>
-                <div style={{ width: "30%", height: 30, backgroundColor: "#5297ff", borderRadius: 100 }}>
+                <div style={{ transition: "all 1s", width: (xp % 1000) / 10 + "%", height: 30, backgroundColor: "#5297ff", borderRadius: 100 }}>
 
                 </div>
             </div>
-            <div style={{ fontWeight: "bold", marginTop: 20 }}>Livello 10</div>
+            <div style={{ fontWeight: "bold", marginTop: 20 }}>Livello {Math.floor(xp / 1000)}</div>
         </div>
         <h2>Codice bonus</h2>
         <p style={{ ...styles.archievement, fontWeight: "normal" }}>Inserisci i codici bonus dei tuoi amici per sbloccare quiz esclusivi!</p>
@@ -53,7 +68,9 @@ const Home = () => {
         <button style={commonStyles.orangeButton}>INSERISCI</button>
 
         <h2>Obiettivi</h2>
-        <ArchievementsList />
+
+        {browser &&
+            getArchievements().map(el => <Archievement key={el.id} desc={el.name} completed={el.unlocked} />)}
 
     </div>
 }

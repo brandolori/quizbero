@@ -1,3 +1,4 @@
+import { unlockArchievement } from "./archievements"
 import makeStyles from "./makeStyles"
 
 const theme = {
@@ -7,17 +8,6 @@ const theme = {
     balooColor: "#3f3f3f"
 }
 
-const calculateXP = (completedQuizzes: number) => 1000 * Math.sqrt(3 * completedQuizzes)
-
-type UserData = {
-    completedQuizzes: string[]
-}
-
-const getUserData = (): UserData => JSON.parse(localStorage.getItem("userdata")) ?? { completedQuizzes: [] }
-
-const setUserData = (data: UserData) => {
-    localStorage.setItem("userdata", JSON.stringify(data))
-}
 
 const commonStyles = makeStyles({
     orangeButton: {
@@ -37,4 +27,4 @@ const commonStyles = makeStyles({
     },
 })
 
-export { theme, commonStyles, calculateXP, getUserData, setUserData }
+export { theme, commonStyles }

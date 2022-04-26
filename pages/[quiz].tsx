@@ -1,6 +1,6 @@
 import { GetStaticPaths, GetStaticProps } from "next"
 import { useEffect, useRef, useState } from "react"
-import data, { Quiz } from "../src/quizData"
+import data, { Quiz } from "../src/quizzes"
 import makeStyles from "../src/makeStyles"
 import Card from "../components/Card"
 import { commonStyles } from "../src/common"

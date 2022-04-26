@@ -1,3 +1,5 @@
+import { unlockArchievement } from "./archievements"
+
 export type Question = {
     question: string,
     answer: "v" | "f",
@@ -97,4 +99,20 @@ const data: Quiz[] = [
     },
 ]
 
+
+const localStorageKey = "quizzes"
+
+const calculateXP = (completedQuizzes: number) => 1000 * Math.sqrt(3 * completedQuizzes)
+
+const getCompletedQuizzes = () => JSON.parse(localStorage.getItem(localStorageKey)) ?? []
+
+const setCompletedQuizzes = (completedQuizzes: string[]) => {
+    localStorage.setItem(localStorageKey, JSON.stringify(completedQuizzes))
+
+    if (calculateXP(completedQuizzes.length) >= 2000)
+        unlockArchievement("lvl2")
+}
+
 export default data
+
+export { getCompletedQuizzes, setCompletedQuizzes, calculateXP }
