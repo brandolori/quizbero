@@ -11,7 +11,7 @@ const styles = makeStyles({
 })
 
 const Home: NextPage = () => <div style={{
-    padding: 40,
+    margin:"0px 40px",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",

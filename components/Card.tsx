@@ -1,6 +1,5 @@
 import makeStyles from "../src/makeStyles"
 import { motion, useAnimation, useMotionValue, useTransform } from "framer-motion"
-import { useState } from "react"
 
 const styles = makeStyles({
     card: {

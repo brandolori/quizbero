@@ -1,3 +1,4 @@
+import Link from "next/link"
 import { useEffect, useRef, useState } from "react"
 import { calculateXP, getUserData, setUserData } from "../src/common"
 import makeStyles from "../src/makeStyles"
@@ -131,8 +132,10 @@ const Summary = ({ data, playerAnswers, success }: { data: Quiz, playerAnswers: 
                 </h2>
                 <ExperienceBar id={data.id} success={success} />
                 <div>
-                    <a style={{ display: "block", fontFamily: "BalooBhai2, sans-serif", fontSize: "2rem", textDecoration: "underline black" }}>Condividi</a>
-                    <a style={{ display: "block", fontFamily: "BalooBhai2, sans-serif", fontSize: "1.25rem", textDecoration: "underline black" }}>Vai al profilo</a>
+                    <a style={{ display: "block", fontFamily: "'Baloo 2', sans-serif", fontSize: "2rem", textDecoration: "underline black" }}>Condividi</a>
+                    <Link href="/profile">
+                        <a style={{ display: "block", fontFamily: "'Baloo 2', sans-serif", fontSize: "1.25rem", textDecoration: "underline black" }}>Vai al profilo</a>
+                    </Link>
                 </div>
             </div>}
         </div>
