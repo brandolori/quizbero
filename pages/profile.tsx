@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { getArchievements } from '../src/archievements'
 import { commonStyles } from '../src/common'
+import getBonusCode from '../src/getBonusCode'
 import makeStyles from '../src/makeStyles'
 import { calculateXP, getCompletedQuizzes } from '../src/quizzes'
 
@@ -29,10 +30,18 @@ const Archievement = ({ completed, desc }: { completed: boolean, desc: string })
 const Home = () => {
 
     const [browser, setBrowser] = useState(false)
+    const [bonusCode, setBonusCode] = useState("")
+
 
     useEffect(() => {
         setBrowser(true)
     })
+
+    useEffect(() => {
+        if (browser) {
+            getBonusCode().then(code => setBonusCode(code + ""))
+        }
+    }, [browser])
 
     const xp = browser
         ? calculateXP(getCompletedQuizzes().length)
@@ -61,12 +70,12 @@ const Home = () => {
         <p style={{ ...styles.archievement, fontWeight: "normal" }}>Inserisci i codici bonus dei tuoi amici per sbloccare quiz esclusivi!</p>
         <div style={{ fontSize: "1.25rem", margin: 20 }}>
             <div>Il tuo codice bonus:</div>
-            <strong style={{ userSelect: "text" }}>ae3a7694</strong>
+            <strong style={{ userSelect: "text" }}>{bonusCode}</strong>
         </div>
 
         <button onClick={async () => {
             try {
-                await navigator.clipboard.writeText("ae3a7694")
+                await navigator.clipboard.writeText(bonusCode)
             } catch (e) { }
         }} style={commonStyles.orangeButton}>COPIA</button>
         <button style={commonStyles.orangeButton}>INSERISCI</button>
