@@ -2,15 +2,8 @@ import type { AppProps } from 'next/app'
 import Head from 'next/head'
 import Layout from '../components/Layout'
 import { theme } from '../src/common'
-import { GoogleFonts } from "nextjs-google-fonts/GoogleFonts";
 
 const MyApp = ({ Component, pageProps }: AppProps) => <>
-    <Head>
-        {/* <link rel="manifest" href="/manifest.json" />
-        <link rel="apple-touch-icon" href="/icons/192.png" />
-        <meta name="theme-color" content={theme.mainColor} /> */}
-        {GoogleFonts()}
-    </Head>
     <Layout>
         <style jsx global>{`
             :root {
@@ -35,16 +28,27 @@ const MyApp = ({ Component, pageProps }: AppProps) => <>
               
             * {
                 color: black;
-                font-family: Carme, serif;
+                font-family: Carme, sans-serif;
                 box-sizing: border-box;
                 user-select: none;
             }
             
+            h1 {
+                font-size: 2.5rem;
+                line-height: 2.25rem;
+            }
+
+            h2 {
+                font-size: 1.75rem;
+                line-height: 1.75rem;
+            }
+
             h1,
             h2,
             h3,
-            h4 {
-                font-family: 'BalooBhai2', sans-serif;
+            h4,
+            button {
+                font-family: 'Baloo 2', cursive;
                 color: var(--baloocolor);
             }
             `}</style>

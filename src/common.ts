@@ -26,14 +26,14 @@ const commonStyles = makeStyles({
         padding: 30,
         border: "none",
         boxShadow: "0 8px 8px -4px grey",
-        fontSize: "1.5rem",
+        fontSize: "1.25rem",
         lineHeight: "1.5rem",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
         textAlign: "center",
-        fontFamily: "BalooBhai2, sans-serif",
-        color: "#3f3f3f",
+        fontWeight: "bold",
+        margin: 10
     },
 })
 
