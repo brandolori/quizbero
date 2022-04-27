@@ -73,7 +73,7 @@ const Summary = ({ data, playerAnswers, success }: { data: Quiz, playerAnswers: 
     return <>
         <div>
             <h1 style={styles.noMtop}>{data.name}</h1>
-            <img draggable="false" style={styles.cardImage} src="/img/log.png" alt="" />
+            <img draggable="false" style={styles.cardImage} src="/img/log.webp" alt="" />
         </div>
 
         <div ref={summaryCardRef} style={styles.summaryCard} onClick={(ev) => {
@@ -106,7 +106,7 @@ const Summary = ({ data, playerAnswers, success }: { data: Quiz, playerAnswers: 
                     <div>
                         Hai risposto: {playerAnswers[index] == "v" ? "vero" : "falso"}
                     </div>
-                    <img draggable="false" height={50} src={data.questions[index].answer == playerAnswers[index] ? "/img/check.png" : "/img/cross.png"} alt="" />
+                    <img draggable="false" height={50} src={data.questions[index].answer == playerAnswers[index] ? "/img/check.webp" : "/img/cross.webp"} alt="" />
                 </div>
 
                 <div style={styles.bottomSummaryCard}>

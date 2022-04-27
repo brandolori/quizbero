@@ -22,11 +22,14 @@ const styles = makeStyles({
         top: 50,
         left: 20,
         right: 20,
+        maxWidth: 576,
+        transition: "all 1s",
+        zIndex: 100
     }
 })
 
 const Archievement = ({ desc }: { desc: string }) => <div style={styles.archievement}>
-    <img style={{ marginRight: 15 }} width={30} height={30} src="/img/check.png" alt="" />
+    <img style={{ marginRight: 15 }} width={30} height={30} src="/img/check.webp" alt="" />
     <div>
 
         <small style={{ fontWeight: "normal" }}>
@@ -106,8 +109,8 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
                 cursor: pointer;
             }
             `}</style>
-            <div style={{ ...styles.archievement, opacity: showArchievement ? 1 : 0, transition: "all 1s", zIndex: 100 }}>
-                <img style={{ marginRight: 15 }} width={30} height={30} src="/img/check.png" alt="" />
+            <div style={{ ...styles.archievement, opacity: showArchievement ? 1 : 0 }}>
+                <img style={{ marginRight: 15 }} width={30} height={30} src="/img/check.webp" alt="" />
                 <div>
 
                     <small style={{ fontWeight: "normal" }}>

@@ -24,7 +24,7 @@ const styles = makeStyles({
 })
 
 const Archievement = ({ completed, desc }: { completed: boolean, desc: string }) => <div style={styles.archievement}>
-    <img style={{ marginRight: 15 }} width={30} height={30} src={completed ? "/img/check.png" : "/img/cross.png"} alt="" />
+    <img style={{ marginRight: 15 }} width={30} height={30} src={completed ? "/img/check.webp" : "/img/cross.webp"} alt="" />
     {desc}
 </div>
 
@@ -69,7 +69,7 @@ const Home = () => {
         textAlign: "center",
     }}>
         <h1>Profilo</h1>
-        <img onClick={() => setEasterEggCounter(i => i + 1)} style={{ margin: 20 }} height={100} src="/img/profilepic.png" alt="" />
+        <img onClick={() => setEasterEggCounter(i => i + 1)} style={{ margin: 20 }} height={100} src="/img/profilepic.webp" alt="" />
 
         <div style={{ margin: "30px 0px", width: "100%", display: "flex", flexDirection: "column", alignItems: "center" }}>
             <div style={{ width: "90%", height: 30, backgroundColor: "#385682", borderRadius: 100, overflow: "hidden" }}>

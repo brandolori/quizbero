@@ -8,6 +8,6 @@ const styles = makeStyles({
     }
 })
 
-const Home: NextPage = () =>  <img src="/img/easter.png" alt="" />
+const Home: NextPage = () =>  <img src="/img/easter.webp" alt="" />
 
 export default Home

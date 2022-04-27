@@ -30,12 +30,12 @@ const Home: NextPage = () => <div style={{
 
     `}</style>
     <h1>Quizbero!</h1>
-    <img height={150} src="/img/log.png" alt="" />
+    <img height={150} src="/img/log.webp" alt="" />
     <h2>Cosa sono?</h2>
     <p >Piccoli quiz che ti accompagneranno alla scoperta del processo di dematerializzazione di Unibo</p>
     <h2>Dove li trovo?</h2>
     <p >Fra gli alberi del campus di Cesena troverai dei Qr Code</p>
-    <img src="/img/qr.png" alt="" />
+    <img src="/img/qr.webp" alt="" />
     <p >Scannerizzali e guarda cosa succede!</p>
     <h2>Hai già completato dei Quizberi?</h2>
     <Link href="/profile">

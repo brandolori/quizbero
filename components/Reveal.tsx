@@ -52,11 +52,12 @@ const Reveal = ({ result, onButtonClick }: { result: "w" | "l", onButtonClick: (
 
         <div style={{ margin: "auto" }}>
             <motion.img
+                width={150}
                 draggable="false"
                 variants={logAnimations}
                 animate={revealState}
                 initial="loading"
-                src="/img/log.png" alt="" />
+                src="/img/log.webp" alt="" />
             <div style={{ fontSize: "6rem", opacity: revealState == "loading" ? 1 : 0 }}>
                 <motion.span
                     animate={{ opacity: [1, 0, 0, 0] }}
