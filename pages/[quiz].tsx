@@ -7,6 +7,7 @@ import { commonStyles } from "../src/common"
 import Reveal from "../components/Reveal"
 import Summary from "../components/Summary"
 import { unlockArchievement } from "../src/archievements"
+import Layout from "../components/Layout"
 
 const styles = makeStyles({
     cardHolder: {
@@ -89,7 +90,7 @@ const QuizPage = ({ data }: QuizPageProps) => {
     }, [playerAnswers])
 
     return <>
-        {phase == "intro" && <>
+        {phase == "intro" && <Layout animateKey="intro">
             <h1 style={styles.noMtop}>Hai trovato un Quizbero!</h1>
             <div>
                 <img height={150} draggable="false" src="/img/log.webp" alt="" />
@@ -97,10 +98,10 @@ const QuizPage = ({ data }: QuizPageProps) => {
             </div>
 
             <button style={commonStyles.orangeButton} onClick={() => setPhase("questions")}>AFFRONTALO!</button>
-        </>}
+        </Layout>}
 
 
-        {phase == "questions" && <>
+        {phase == "questions" && <Layout animateKey="questions">
             <div>
                 <h1 style={styles.noMtop}>{data.name}</h1>
                 <img draggable="false" style={styles.cardImage} src="/img/log.webp" alt="" />
@@ -118,13 +119,15 @@ const QuizPage = ({ data }: QuizPageProps) => {
                 }
             </div>
             <div style={styles.questionCounter}>{data.questions.length - playerAnswers.lastIndexOf("unanswered")} di {data.questions.length}</div>
-        </>}
+        </Layout>}
 
-        {phase == "reveal" &&
-            <Reveal result={checkWin() ? "w" : "l"} onButtonClick={() => setPhase("summary")} />}
+        {phase == "reveal" && <Layout animateKey="reveal">
+            <Reveal result={checkWin() ? "w" : "l"} onButtonClick={() => setPhase("summary")} />
+        </Layout>}
 
-        {phase == "summary" &&
-            <Summary data={data} playerAnswers={playerAnswers} success={checkWin()} />}
+        {phase == "summary" && <Layout animateKey="summary">
+            <Summary data={data} playerAnswers={playerAnswers} success={checkWin()} />
+        </Layout>}
     </>;
 }
 

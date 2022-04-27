@@ -1,3 +1,4 @@
+import { motion } from "framer-motion"
 import makeStyles from "../src/makeStyles"
 
 const styles = makeStyles({
@@ -16,9 +17,14 @@ const styles = makeStyles({
     },
 })
 
-const Layout = (props) => {
+const Layout = ({ animateKey, children }) => {
 
-    return (<div style={{ width: "100%", height: "100%" }}>
+    return (<motion.div
+        key={animateKey}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        style={{ width: "100%", height: "100%" }}>
 
         <style jsx>
             {`
@@ -29,9 +35,9 @@ const Layout = (props) => {
             }
             `}</style>
         <div style={styles.container} className="container">
-            {props.children}
+            {children}
         </div>
-    </div>
+    </motion.div>
     )
 }
 

@@ -1,3 +1,4 @@
+import { AnimatePresence } from 'framer-motion'
 import type { AppProps } from 'next/app'
 import { useEffect, useState } from 'react'
 import Layout from '../components/Layout'
@@ -57,8 +58,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
     })
 
     return <>
-        <Layout>
-            <style jsx global>{`
+        <style jsx global>{`
             :root {
                 --maincolor: ${theme.mainColor};
                 --backgroundcolor: ${theme.backgroundColor};
@@ -109,21 +109,24 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
                 cursor: pointer;
             }
             `}</style>
-            <div style={{ ...styles.archievement, opacity: showArchievement ? 1 : 0 }}>
-                <img style={{ marginRight: 15 }} width={30} height={30} src="/img/check.webp" alt="" />
+
+        <div style={{ ...styles.archievement, opacity: showArchievement ? 1 : 0 }}>
+            <img style={{ marginRight: 15 }} width={30} height={30} src="/img/check.webp" alt="" />
+            <div>
+
+                <small style={{ fontWeight: "normal" }}>
+                    Archievement sbloccato!
+                </small>
                 <div>
 
-                    <small style={{ fontWeight: "normal" }}>
-                        Archievement sbloccato!
-                    </small>
-                    <div>
-
-                        {archievement}
-                    </div>
+                    {archievement}
                 </div>
             </div>
+        </div>
+        <AnimatePresence>
+
             <Component {...pageProps} />
-        </Layout>
+        </AnimatePresence>
     </>
 }
 
