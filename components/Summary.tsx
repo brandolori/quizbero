@@ -4,6 +4,7 @@ import { calculateXP, getCompletedQuizzes, setCompletedQuizzes } from "../src/qu
 import makeStyles from "../src/makeStyles"
 import { Quiz } from "../src/quizzes"
 import { unlockArchievement } from "../src/archievements"
+import { motion } from "framer-motion"
 
 const styles = makeStyles({
     noMtop: { marginTop: 0 },
@@ -15,6 +16,16 @@ const styles = makeStyles({
         fontFamily: "BalooBhai2, sans-serif",
         marginBottom: 0,
         fontSize: "1.25rem"
+    },
+    lastCard: {
+        width: "100%",
+        height: "100%",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "space-between",
+        textAlign: "center",
+        padding: 40
     },
     summaryCard: {
         position: "relative",
@@ -68,6 +79,19 @@ const styles = makeStyles({
 
 const Summary = ({ data, playerAnswers, success }: { data: Quiz, playerAnswers: ("unanswered" | "v" | "f")[], success: boolean }) => {
     const [index, setQuestionIndex] = useState(data.questions.length - 1)
+    const [showTutorial, setShowTutorial] = useState(true)
+
+    const onClick = (ev) => {
+        const clickPercent = (ev.clientX - summaryCardRef.current.getBoundingClientRect().left) / summaryCardRef.current.offsetWidth
+        if (clickPercent < .3) {
+            setShowTutorial(false)
+            setQuestionIndex((index) => Math.min(data.questions.length - 1, index + 1))
+        }
+        if (clickPercent > .6) {
+            setShowTutorial(false)
+            setQuestionIndex((index) => Math.max(-1, index - 1))
+        }
+    }
 
     const summaryCardRef = useRef<HTMLDivElement>()
     return <>
@@ -76,13 +100,13 @@ const Summary = ({ data, playerAnswers, success }: { data: Quiz, playerAnswers: 
             <img draggable="false" style={styles.cardImage} src="/img/log.webp" alt="" />
         </div>
 
-        <div ref={summaryCardRef} style={styles.summaryCard} onClick={(ev) => {
-            const clickPercent = (ev.clientX - summaryCardRef.current.getBoundingClientRect().left) / summaryCardRef.current.offsetWidth
-            if (clickPercent < .3)
-                setQuestionIndex((index) => Math.min(data.questions.length - 1, index + 1))
-            if (clickPercent > .6)
-                setQuestionIndex((index) => Math.max(-1, index - 1))
-        }}>
+        <div ref={summaryCardRef} style={styles.summaryCard} onClick={onClick}>
+            {showTutorial &&
+                <motion.img
+                    animate={{ opacity: [0, 1, 1, 1, 0], scale: [1, 1, .9, 1, 1] }}
+                    transition={{ repeat: Infinity, delay: 4, repeatDelay: 2, duration: 1 }}
+                    style={{ position: "absolute", width: 80, zIndex: 10, top: "20%", right: -20 }}
+                    src="/img/hand.webp" alt="" />}
             <div style={styles.storyIndexHolder}>
 
                 {Array.from(Array(data.questions.length + 1))
@@ -115,21 +139,11 @@ const Summary = ({ data, playerAnswers, success }: { data: Quiz, playerAnswers: 
                 </div>
             </>}
 
-            {index == -1 && <div style={{
-                width: "100%",
-                height: "100%",
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                justifyContent: "space-between",
-                textAlign: "center",
-                padding: 40
-            }}>
+            {index == -1 && <div style={styles.lastCard}>
                 <h2 style={{ fontSize: "1.8rem", lineHeight: "2rem" }}>
                     {success
                         ? "Hai completato il Quizbero!"
-                        : "Ritenta..."
-                    }
+                        : "Ritenta..."}
                 </h2>
                 <ExperienceBar id={data.id} success={success} />
                 <div>

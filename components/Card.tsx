@@ -43,7 +43,8 @@ const styles = makeStyles({
 type CardProps = {
     question: string,
     onAnswer: (answer: "v" | "f") => void,
-    interactable: boolean
+    interactable: boolean,
+    onInteract: () => void
 }
 
 const Card = (props: CardProps) => {
@@ -75,6 +76,7 @@ const Card = (props: CardProps) => {
         dragConstraints={{ left: -1000, right: 1000 }}
         dragSnapToOrigin={true}
         style={{ ...styles.card, opacity: cardOpacity, rotate: cardRotation, x: motionValue }}
+        onDragStart={() => { props.onInteract() }}
         onDragEnd={(event, info) => {
 
             //if the card is dragged over the threshold, call the callback

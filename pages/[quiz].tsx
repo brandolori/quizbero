@@ -8,6 +8,7 @@ import Reveal from "../components/Reveal"
 import Summary from "../components/Summary"
 import { unlockArchievement } from "../src/archievements"
 import Layout from "../components/Layout"
+import { motion } from "framer-motion"
 
 const styles = makeStyles({
     cardHolder: {
@@ -34,6 +35,8 @@ type QuizPageProps = {
 }
 
 const QuizPage = ({ data }: QuizPageProps) => {
+
+    const [showTutorial, setShowTutorial] = useState(true)
 
     const [under5Seconds, setUnder5Seconds] = useState(true)
 
@@ -92,8 +95,18 @@ const QuizPage = ({ data }: QuizPageProps) => {
     return <>
         {phase == "intro" && <Layout animateKey="intro">
             <h1 style={styles.noMtop}>Hai trovato un Quizbero!</h1>
-            <div>
-                <img height={150} draggable="false" src="/img/log.webp" alt="" />
+            <div style={{ width: "100%" }}>
+                <div style={{ position: "relative", width: "100%" }}>
+
+                    <div
+                        style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", width: "100%", zIndex: -1 }} >
+                        <motion.img
+                            animate={{ rotate: [0, 360] }}
+                            transition={{ repeat: Infinity, duration: 10, ease: "linear" }}
+                            width="100%" height="100%" src="/img/rays.webp" />
+                    </div>
+                    <img height={150} draggable="false" src="/img/log.webp" alt="" />
+                </div>
                 <h2>{data.name}</h2>
             </div>
 
@@ -107,9 +120,16 @@ const QuizPage = ({ data }: QuizPageProps) => {
                 <img draggable="false" style={styles.cardImage} src="/img/log.webp" alt="" />
             </div>
             <div style={styles.cardHolder}>
+                {showTutorial &&
+                    <motion.img
+                        animate={{ opacity: [0, 1, 1, 1, 0], x: [0, -50, 50, 0] }}
+                        transition={{ repeat: Infinity, delay: 4, repeatDelay: 2, duration: 1 }}
+                        style={{ position: "absolute", width: 70, zIndex: 10, bottom: -40, right: "35%" }}
+                        src="/img/swipe.webp" alt="" />}
                 {
                     data.questions.map((el, i) =>
                         playerAnswers[i] == "unanswered" && <Card
+                            onInteract={() => setShowTutorial(false)}
                             key={i}
                             question={el.question}
                             onAnswer={(answer) => answerCallback(answer, i)}
