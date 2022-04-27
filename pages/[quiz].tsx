@@ -6,6 +6,7 @@ import Card from "../components/Card"
 import { commonStyles } from "../src/common"
 import Reveal from "../components/Reveal"
 import Summary from "../components/Summary"
+import { unlockArchievement } from "../src/archievements"
 
 const styles = makeStyles({
     cardHolder: {
@@ -33,6 +34,14 @@ type QuizPageProps = {
 
 const QuizPage = ({ data }: QuizPageProps) => {
 
+    const [under5Seconds, setUnder5Seconds] = useState(true)
+
+    useEffect(() => {
+        setTimeout(() => {
+            setUnder5Seconds(false)
+        }, 5000);
+    }, [])
+
     // only one phase of the quiz active at any time
     const [phase, setPhase] = useState<"intro" | "questions" | "reveal" | "summary">("intro")
 
@@ -41,14 +50,28 @@ const QuizPage = ({ data }: QuizPageProps) => {
 
     const rightAnswersNeeded = Math.round(data.questions.length * 2 / 3)
 
-    const checkWin = () =>
-        playerAnswers.map(
-            (el, i) => data.questions[i].answer == el
-                ? 1
-                : 0)
-            .reduce((acc, sum) => acc + sum, 0) >= rightAnswersNeeded
-            ? true
-            : false
+    const checkWin = () => {
+        const rightAnswers = playerAnswers
+            .map((el, i) => data.questions[i].answer == el ? 1 : 0)
+            .reduce((acc, sum) => acc + sum, 0)
+
+        const win = rightAnswers >= rightAnswersNeeded
+
+        // sezione archievements
+        if (rightAnswers == rightAnswersNeeded)
+            unlockArchievement("almost")
+
+        if (rightAnswers == data.questions.length)
+            unlockArchievement("noerrors")
+
+        if (rightAnswers == 0)
+            unlockArchievement("allerrors")
+
+        if (win && under5Seconds)
+            unlockArchievement("sonic")
+
+        return win
+    }
 
 
     const answerCallback = (answer: "v" | "f", index: number) => {

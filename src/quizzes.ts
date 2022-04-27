@@ -1,4 +1,5 @@
 import { unlockArchievement } from "./archievements"
+import { bonusCodes } from "./getBonusCode"
 
 export type Question = {
     question: string,
@@ -109,8 +110,21 @@ const getCompletedQuizzes = () => JSON.parse(localStorage.getItem(localStorageKe
 const setCompletedQuizzes = (completedQuizzes: string[]) => {
     localStorage.setItem(localStorageKey, JSON.stringify(completedQuizzes))
 
+    // archievements section
+    if (completedQuizzes.length > 0)
+        unlockArchievement("firstquiz")
+
     if (calculateXP(completedQuizzes.length) >= 2000)
-        unlockArchievement("lvl2")
+        unlockArchievement("lvl3")
+
+    if (calculateXP(completedQuizzes.length) >= 2000)
+        unlockArchievement("lvl5")
+
+    if (calculateXP(completedQuizzes.length) >= 2000)
+        unlockArchievement("lvl10")
+
+    if (completedQuizzes.filter(el => bonusCodes.includes(el)).length == bonusCodes.length)
+        unlockArchievement("allbonuscodes")
 }
 
 export default data

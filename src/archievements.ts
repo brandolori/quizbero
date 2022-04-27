@@ -1,16 +1,76 @@
+type Archievement = {
+    name: string,
+    id: string,
+    hidden?: boolean
+}
+
 const archievementData = [
     {
-        name: "Raggiungi il livello 2!",
-        id: "lvl2"
+        name: "Completa il tuo primo quiz!",
+        id: "firstquiz"
     },
     {
         name: "Raggiungi il livello 3!",
         id: "lvl3"
     },
     {
+        name: "Raggiungi il livello 5!",
+        id: "lvl5"
+    },
+    {
+        name: "Raggiungi il livello 10!",
+        id: "lvl10"
+    },
+    {
         name: "Riscatta un codice bonus!",
         id: "bonuscode"
     },
+    {
+        name: "Copia il tuo codice bonus",
+        id: "copybonuscode"
+    },
+    {
+        name: "Condividi la tua vittoria su un quiz!",
+        id: "sharewin"
+    },
+    {
+        name: "Condividi la tua sconfitta su un quiz!",
+        id: "shareloss",
+        hidden: true
+    },
+    {
+        name: "Copia il tuo codice bonus",
+        id: "bonuscode"
+    },
+    {
+        name: "Completa un quiz per un pelo!",
+        id: "almost",
+        hidden: true
+    },
+    {
+        name: "Supera un quiz senza commettere errori!",
+        id: "noerrors"
+    },
+    {
+        name: "Sbaglia tutte le domande di un quiz",
+        id: "allerrors",
+        hidden: true
+    },
+    {
+        name: "Completa tutti e 6 i quiz bonus!",
+        id: "allbonuscodes"
+    },
+    {
+        name: "Completa un quiz in meno di 5 secondi!",
+        id: "sonic",
+        hidden: true
+    },
+    {
+        name: "Trova l'easter egg dello sviluppatore",
+        id: "easteregg",
+        hidden: true
+    },
+
 ]
 
 const localStorageKey = "archievements"

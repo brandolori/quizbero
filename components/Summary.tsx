@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react"
 import { calculateXP, getCompletedQuizzes, setCompletedQuizzes } from "../src/quizzes"
 import makeStyles from "../src/makeStyles"
 import { Quiz } from "../src/quizzes"
+import { unlockArchievement } from "../src/archievements"
 
 const styles = makeStyles({
     noMtop: { marginTop: 0 },
@@ -133,6 +134,10 @@ const Summary = ({ data, playerAnswers, success }: { data: Quiz, playerAnswers: 
                 <ExperienceBar id={data.id} success={success} />
                 <div>
                     <a onClick={async () => {
+                        if (success)
+                            unlockArchievement("sharewin")
+                        else
+                            unlockArchievement("shareloss")
                         try {
                             await navigator.share({
                                 text: success
