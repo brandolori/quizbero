@@ -44,7 +44,7 @@ const Home = () => {
     })
 
     useEffect(() => {
-        if (easterEggCounter > 4){
+        if (easterEggCounter > 4) {
             unlockArchievement("easteregg")
             router.push("/easteregg")
         }
@@ -125,7 +125,7 @@ const Home = () => {
 
         {browser &&
             // nascondi gli archievement segreti a meno che non siano stati completati
-            getArchievements().filter(el => !el.hidden || el.unlocked)
+            getArchievements().map(el => el.hidden && !el.unlocked ? { ...el, name: "????????" } : el)
                 .map(el => <Archievement key={el.id} desc={el.name} completed={el.unlocked} />)}
 
     </div>

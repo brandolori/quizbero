@@ -1,6 +1,4 @@
 import type { NextPage } from 'next'
-import Link from 'next/link'
-import { commonStyles } from '../src/common'
 import makeStyles from '../src/makeStyles'
 
 const styles = makeStyles({

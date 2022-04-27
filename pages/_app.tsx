@@ -49,7 +49,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
             setShowArchievement(true)
             setTimeout(() => {
                 setShowArchievement(false)
-            }, 5000)
+            }, 4000)
         })
     })
 
@@ -106,7 +106,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
                 cursor: pointer;
             }
             `}</style>
-            <div style={{ ...styles.archievement, opacity: showArchievement ? 1 : 0, transition: "all 1s" }}>
+            <div style={{ ...styles.archievement, opacity: showArchievement ? 1 : 0, transition: "all 1s", zIndex: 100 }}>
                 <img style={{ marginRight: 15 }} width={30} height={30} src="/img/check.png" alt="" />
                 <div>
 

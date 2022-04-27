@@ -4,25 +4,25 @@ type Archievement = {
     hidden?: boolean
 }
 
-const archievementData = [
+const archievementData: Archievement[] = [
     {
-        name: "Completa il tuo primo quiz!",
+        name: "Completa il tuo primo quiz",
         id: "firstquiz"
     },
     {
-        name: "Raggiungi il livello 3!",
+        name: "Raggiungi il livello 3",
         id: "lvl3"
     },
     {
-        name: "Raggiungi il livello 5!",
+        name: "Raggiungi il livello 5",
         id: "lvl5"
     },
     {
-        name: "Raggiungi il livello 10!",
+        name: "Raggiungi il livello 10",
         id: "lvl10"
     },
     {
-        name: "Riscatta un codice bonus!",
+        name: "Riscatta un codice bonus",
         id: "bonuscode"
     },
     {
@@ -30,11 +30,11 @@ const archievementData = [
         id: "copybonuscode"
     },
     {
-        name: "Condividi la tua vittoria su un quiz!",
+        name: "Condividi la tua vittoria su un quiz",
         id: "sharewin"
     },
     {
-        name: "Condividi la tua sconfitta su un quiz!",
+        name: "Condividi la tua sconfitta su un quiz",
         id: "shareloss",
         hidden: true
     },
@@ -43,12 +43,12 @@ const archievementData = [
         id: "bonuscode"
     },
     {
-        name: "Completa un quiz per un pelo!",
+        name: "Completa un quiz per un pelo",
         id: "almost",
         hidden: true
     },
     {
-        name: "Supera un quiz senza commettere errori!",
+        name: "Supera un quiz senza commettere errori",
         id: "noerrors"
     },
     {
@@ -57,11 +57,11 @@ const archievementData = [
         hidden: true
     },
     {
-        name: "Completa tutti e 6 i quiz bonus!",
+        name: "Completa tutti e 6 i quiz bonus",
         id: "allbonuscodes"
     },
     {
-        name: "Completa un quiz in meno di 5 secondi!",
+        name: "Completa un quiz in meno di 5 secondi",
         id: "sonic",
         hidden: true
     },

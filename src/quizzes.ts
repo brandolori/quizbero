@@ -114,13 +114,13 @@ const setCompletedQuizzes = (completedQuizzes: string[]) => {
     if (completedQuizzes.length > 0)
         unlockArchievement("firstquiz")
 
-    if (calculateXP(completedQuizzes.length) >= 2000)
+    if (calculateXP(completedQuizzes.length) >= 3000)
         unlockArchievement("lvl3")
 
-    if (calculateXP(completedQuizzes.length) >= 2000)
+    if (calculateXP(completedQuizzes.length) >= 5000)
         unlockArchievement("lvl5")
 
-    if (calculateXP(completedQuizzes.length) >= 2000)
+    if (calculateXP(completedQuizzes.length) >= 10000)
         unlockArchievement("lvl10")
 
     if (completedQuizzes.filter(el => bonusCodes.includes(el)).length == bonusCodes.length)
