@@ -92,7 +92,7 @@ const QuizPage = ({ data }: QuizPageProps) => {
         {phase == "intro" && <>
             <h1 style={styles.noMtop}>Hai trovato un Quizbero!</h1>
             <div>
-                <img height={150} draggable="false" src="/img/log.wepb" alt="" />
+                <img height={150} draggable="false" src="/img/log.webp" alt="" />
                 <h2>{data.name}</h2>
             </div>
 
