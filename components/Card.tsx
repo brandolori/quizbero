@@ -62,13 +62,13 @@ const Card = (props: CardProps) => {
     const trueStampOpacity = useTransform(
         motionValue,
         [-200, -150, 0, 150, 200],
-        [0, 0, 0, .2, 1]
+        [0, 0, 0, .5, 1]
     );
 
     const falseStampOpacity = useTransform(
         motionValue,
         [-200, -150, 0, 150, 200],
-        [1, .2, 0, 0, 0]
+        [1, .5, 0, 0, 0]
     );
 
     return <motion.div

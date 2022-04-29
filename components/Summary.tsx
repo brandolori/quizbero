@@ -45,13 +45,13 @@ const styles = makeStyles({
         bottom: "40%",
         left: 0,
         right: 0,
-        fontSize: "1.3rem",
+        fontSize: "1.2rem",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "space-between",
         textAlign: "center",
-        padding: "30px 20px"
+        padding: "30px 40px"
     },
     bottomSummaryCard: {
         position: "absolute",
@@ -61,12 +61,12 @@ const styles = makeStyles({
         right: 0,
         backgroundColor: "var(--cardcolor)",
         borderRadius: "0px 0px 40px 40px",
-        fontSize: "1.25rem",
+        fontSize: "1.2rem",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
         textAlign: "center",
-        padding: "30px 20px"
+        padding: "30px 30px"
     },
     storyIndexHolder: {
         display: "flex",
@@ -74,6 +74,11 @@ const styles = makeStyles({
         alignItems: "stretch",
         position: "absolute",
         top: 7, left: 40, right: 40, height: 3
+    },
+    lastCardLink: {
+        display: "block",
+        fontFamily: "'Baloo 2', sans-serif",
+        textDecoration: "underline black"
     }
 })
 
@@ -128,9 +133,12 @@ const Summary = ({ data, playerAnswers, success }: { data: Quiz, playerAnswers: 
                         {data.questions[index].question}
                     </div>
                     <div>
-                        Hai risposto: {playerAnswers[index] == "v" ? "vero" : "falso"}
+
+                        <div style={{ marginBottom: 10 }}>
+                            Hai risposto: <strong>{playerAnswers[index] == "v" ? "vero" : "falso"}</strong>
+                        </div>
+                        <img draggable="false" height={50} src={data.questions[index].answer == playerAnswers[index] ? "/img/check.webp" : "/img/cross.webp"} alt="" />
                     </div>
-                    <img draggable="false" height={50} src={data.questions[index].answer == playerAnswers[index] ? "/img/check.webp" : "/img/cross.webp"} alt="" />
                 </div>
 
                 <div style={styles.bottomSummaryCard}>
@@ -159,9 +167,9 @@ const Summary = ({ data, playerAnswers, success }: { data: Quiz, playerAnswers: 
                                     : 'Non sono riuscito a completare un Quizbero! Riesci a darmi una mano? Scoprilo su quizbero.it'
                             })
                         } catch (e) { }
-                    }} style={{ display: "block", fontFamily: "'Baloo 2', sans-serif", fontSize: "2rem", textDecoration: "underline black" }}>Condividi</a>
+                    }} style={{ ...styles.lastCardLink, fontSize: "2rem" }}>Condividi</a>
                     <Link href="/profile">
-                        <a style={{ display: "block", fontFamily: "'Baloo 2', sans-serif", fontSize: "1.25rem", textDecoration: "underline black" }}>Vai al profilo</a>
+                        <a style={{ ...styles.lastCardLink, fontSize: "1.25rem" }}>Vai al profilo</a>
                     </Link>
                 </div>
             </div>}

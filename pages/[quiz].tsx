@@ -16,17 +16,20 @@ const styles = makeStyles({
         width: "80%",
         height: 350,
         overflow: "visible",
-        margin: 40
+        margin: 30
     },
     noMtop: { marginTop: 0 },
     cardImage: {
         margin: 0,
-        height: 100
+        height: 80
     },
     questionCounter: {
         fontFamily: "BalooBhai2, sans-serif",
         marginBottom: 0,
         fontSize: "1.25rem"
+    },
+    underTitle: {
+        marginBottom: 0
     }
 })
 
@@ -118,6 +121,9 @@ const QuizPage = ({ data }: QuizPageProps) => {
             <div>
                 <h1 style={styles.noMtop}>{data.name}</h1>
                 <img draggable="false" style={styles.cardImage} src="/img/log.webp" alt="" />
+                <h2 style={styles.underTitle}>
+                    Vero o falso?
+                </h2>
             </div>
             <div style={styles.cardHolder}>
                 {showTutorial &&
@@ -134,8 +140,7 @@ const QuizPage = ({ data }: QuizPageProps) => {
                             question={el.question}
                             onAnswer={(answer) => answerCallback(answer, i)}
                             interactable={playerAnswers.lastIndexOf("unanswered") == i}
-                        />
-                    )
+                        />)
                 }
             </div>
             <div style={styles.questionCounter}>{data.questions.length - playerAnswers.lastIndexOf("unanswered")} di {data.questions.length}</div>
