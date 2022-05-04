@@ -19,20 +19,30 @@ const data: Quiz[] = [
         id: "0",
         questions: [
             {
-                question: "L'Università di Bologna ricicla il 30% della carta che utilizza",
+                question: "Il numero di persone che muoiono di fame dal 2015 sta diminuendo",
+                answer: "f",
+                funFact: "Nel 2015 erano 784m, nel 2018 erano 822m",
+            },
+            {
+                question: "La percentuale di adulti analfabeti al mondo è superiore del 15%",
                 answer: "v",
-                funFact: "Unibo supera la media nazionale del 20%!",
+                funFact: "È in costante disciesa, ma si attesta al 20%",
             },
             {
-                question: "La maggior parte delle tesi non viene neanche stampata",
+                question: "In nessun paese a mondo ci sono più donne che uomini in parlamento",
                 answer: "f",
-                funFact: "Gli studenti continuano a preferire la versione cartacea della propria tesi",
+                funFact: "Il Ruanda e la Bolivia hanno più donne che uomini in parlamento",
             },
             {
-                question: "La dematerializzazione non ha alcun effetto benefico",
+                question: "Nel 2017, c’erano più persone in estrema povertà di quelle che possedevano un gatto",
+                answer: "v",
+                funFact: "Il numero di gatti si attesta intorno a 650 milioni, mentre il numero di persone in estrema povertà 696 milioni",
+            },
+            {
+                question: "Continuando così fermeremo il riscaldamento globale a 1.5 C°, come previsto nell’accordo di Parigi",
                 answer: "f",
-                funFact: "Grazie alla dematerializzazione, unibo ha salvato 1000 alberi solo nel 2021!",
-            }
+                funFact: "Alla velocità con cui stiamo implementando le misure di sostenibilità, si arriverà ad un massimo di tre gradi",
+            },
         ]
     },
     {
@@ -40,62 +50,30 @@ const data: Quiz[] = [
         id: "1",
         questions: [
             {
-                question: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+                question: "Il processo più dispendioso di carta in Unibo prima del passaggio al digitale era l’orientamento degli studenti delle superiori",
                 answer: "v",
-                funFact: "Unibo supera la media nazionale del 20%!",
+                funFact: "Grazie alla dematerializzazione (ossia il passaggio in app!) Unibo risparmia ogni anno 312 alberi!",
             },
             {
-                question: "sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam",
+                question: "È obbligatorio stampare la propria tesi per potersi laureare con Unibo",
                 answer: "f",
-                funFact: "Gli studenti continuano a preferire la versione cartacea della propria tesi",
+                funFact: "Dal 2021 è possibile consegnarle solo in digitale. Questa dematerializzazione risparmia 236 alberi all’anno!",
             },
             {
-                question: "quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat",
+                question: "Un documento dematerializzato (non su carta ma digitale) è più difficile da archiviare e ritrovare in futuro",
                 answer: "f",
-                funFact: "Grazie alla dematerializzazione, unibo ha salvato 1000 alberi solo nel 2021!",
-            }
-        ]
-    },
-    {
-        name: "Abete giallo",
-        id: "2",
-        questions: [
+                funFact: "Un documento digitale è molto più facile da gestire, soprattutto se sei un’organizzazione grande quanto un’università!",
+            },
             {
-                question: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+                question: "Unibo ha risparmiato più carta nel 2022 che in ogni altro anno",
                 answer: "v",
-                funFact: "Unibo supera la media nazionale del 20%!",
+                funFact: "Solo nel 2022, Unibo ha risparmiato l’equivalente di 670 alberi di carta!",
             },
             {
-                question: "sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam",
-                answer: "f",
-                funFact: "Gli studenti continuano a preferire la versione cartacea della propria tesi",
-            },
-            {
-                question: "quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat",
-                answer: "f",
-                funFact: "Grazie alla dematerializzazione, unibo ha salvato 1000 alberi solo nel 2021!",
-            }
-        ]
-    },
-    {
-        name: "Pino blu",
-        id: "3",
-        questions: [
-            {
-                question: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+                question: "Con la quantità di carta risparmiata nei progetti di dematerializzazione Unibo, si potrebbe coprire la superficie di San Marino",
                 answer: "v",
-                funFact: "Unibo supera la media nazionale del 20%!",
+                funFact: "Si arriverebe a coprire 0.83 chilometri quadri, quasi due volte la città del vaticano!",
             },
-            {
-                question: "sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam",
-                answer: "f",
-                funFact: "Gli studenti continuano a preferire la versione cartacea della propria tesi",
-            },
-            {
-                question: "quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat",
-                answer: "f",
-                funFact: "Grazie alla dematerializzazione, unibo ha salvato 1000 alberi solo nel 2021!",
-            }
         ]
     },
 ]

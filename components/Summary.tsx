@@ -45,13 +45,16 @@ const styles = makeStyles({
         bottom: "40%",
         left: 0,
         right: 0,
-        fontSize: "1.2rem",
+        // fontSize: "1.1rem",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "space-between",
         textAlign: "center",
-        padding: "30px 40px"
+        padding: "30px 40px",
+        paddingBottom: 10,
+        letterSpacing: ".4px",
+        // lineHeight: "1.2rem"
     },
     bottomSummaryCard: {
         position: "absolute",
@@ -61,12 +64,13 @@ const styles = makeStyles({
         right: 0,
         backgroundColor: "var(--cardcolor)",
         borderRadius: "0px 0px 40px 40px",
-        fontSize: "1.2rem",
+        fontSize: "1.05rem",
+        letterSpacing: ".4px",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
         textAlign: "center",
-        padding: "30px 30px"
+        padding: 30
     },
     storyIndexHolder: {
         display: "flex",

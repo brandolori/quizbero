@@ -1,5 +1,5 @@
 import makeStyles from "../src/makeStyles"
-import { motion, useAnimation, useMotionValue, useTransform } from "framer-motion"
+import { motion, useMotionValue, useTransform } from "framer-motion"
 
 const styles = makeStyles({
     card: {
@@ -8,32 +8,34 @@ const styles = makeStyles({
         width: "100%",
         height: 350,
         borderRadius: 40,
-        padding: 40,
+        padding: "50px 40px",
         boxShadow: "0 8px 8px -4px grey",
-        fontSize: "1.5rem",
+        fontSize: "1.2rem",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        textAlign: "center"
+        textAlign: "center",
+        lineHeight: "1.7rem",
+        letterSpacing: ".3px",
     },
     stamp: {
         borderRadius: 5,
         position: "absolute",
-        top: 66,
+        top: 40,
         fontFamily: "BalooBhai2, sans-serif",
         lineHeight: "1.75rem",
-        fontSize: "2.25rem"
+        fontSize: "2.25rem",
     },
     trueStamp: {
         border: "5px solid green",
-        left: "20%",
+        left: 40,
         //@ts-ignore
         rotate: -15,
         color: "green"
     },
     falseStamp: {
         border: "5px solid red",
-        right: "20%",
+        right: 40,
         //@ts-ignore
         rotate: 15,
         color: "red"
@@ -87,7 +89,10 @@ const Card = (props: CardProps) => {
     >
         <motion.div style={{ ...styles.stamp, ...styles.trueStamp, opacity: trueStampOpacity }}>VERO</motion.div>
         <motion.div style={{ ...styles.stamp, ...styles.falseStamp, opacity: falseStampOpacity }}>FALSO</motion.div>
-        {props.question}
+        <span>
+
+            {props.question}
+        </span>
     </motion.div >
 }
 
