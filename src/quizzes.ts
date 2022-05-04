@@ -19,16 +19,6 @@ const data: Quiz[] = [
         id: "0",
         questions: [
             {
-                question: "Trascina a sinistra per rispondere falso!",
-                answer: "f",
-                funFact: "Se non hai risposto falso, hai perso un punto facile!",
-            },
-            {
-                question: "Trascina a destra per rispondere vero!",
-                answer: "v",
-                funFact: "Anche questa è una domanda facile...",
-            },
-            {
                 question: "Il numero di persone che muoiono di fame dal 2015 sta diminuendo",
                 answer: "f",
                 funFact: "Nel 2015 erano 784m, nel 2018 erano 822m",
@@ -52,6 +42,16 @@ const data: Quiz[] = [
                 question: "Continuando così fermeremo il riscaldamento globale a 1.5 C°, come previsto nell’accordo di Parigi",
                 answer: "f",
                 funFact: "Alla velocità con cui stiamo implementando le misure di sostenibilità, si arriverà ad un massimo di tre gradi",
+            },
+            {
+                question: "Trascina a sinistra per rispondere falso!",
+                answer: "f",
+                funFact: "Se non hai risposto falso, hai perso un punto facile!",
+            },
+            {
+                question: "Trascina a destra per rispondere vero!",
+                answer: "v",
+                funFact: "Anche questa è una domanda facile...",
             },
         ]
     },
