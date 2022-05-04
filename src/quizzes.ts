@@ -19,6 +19,16 @@ const data: Quiz[] = [
         id: "0",
         questions: [
             {
+                question: "Trascina a sinistra per rispondere falso!",
+                answer: "f",
+                funFact: "Se non hai risposto falso, hai perso un punto facile!",
+            },
+            {
+                question: "Trascina a destra per rispondere vero!",
+                answer: "v",
+                funFact: "Anche questa è una domanda facile...",
+            },
+            {
                 question: "Il numero di persone che muoiono di fame dal 2015 sta diminuendo",
                 answer: "f",
                 funFact: "Nel 2015 erano 784m, nel 2018 erano 822m",
