@@ -9,6 +9,7 @@ import Summary from "../components/Summary"
 import { unlockArchievement } from "../src/archievements"
 import Layout from "../components/Layout"
 import { motion } from "framer-motion"
+import Tutorial from "../components/Tutorial"
 
 const styles = makeStyles({
     cardHolder: {
@@ -39,7 +40,9 @@ type QuizPageProps = {
 
 const QuizPage = ({ data }: QuizPageProps) => {
 
-    const [showTutorial, setShowTutorial] = useState(true)
+    const [tutorial, setTutorial] = useState(true)
+
+    const [showPrompt, setShowPrompt] = useState(true)
 
     const [under5Seconds, setUnder5Seconds] = useState(true)
 
@@ -122,11 +125,11 @@ const QuizPage = ({ data }: QuizPageProps) => {
                 <h1 style={styles.noMtop}>{data.name}</h1>
                 <img draggable="false" style={styles.cardImage} src="/img/log.webp" alt="" />
                 <h2 style={styles.underTitle}>
-                    Vero o falso?
+                    Falso o Vero?
                 </h2>
             </div>
             <div style={styles.cardHolder}>
-                {showTutorial &&
+                {showPrompt &&
                     <motion.img
                         animate={{ opacity: [0, 1, 1, 1, 0], x: [0, -50, 50, 0] }}
                         transition={{ repeat: Infinity, delay: 4, repeatDelay: 2, duration: 1 }}
@@ -135,13 +138,15 @@ const QuizPage = ({ data }: QuizPageProps) => {
                 {
                     data.questions.map((el, i) =>
                         playerAnswers[i] == "unanswered" && <Card
-                            onInteract={() => setShowTutorial(false)}
+                            onInteract={() => setShowPrompt(false)}
                             key={i}
                             question={el.question}
                             onAnswer={(answer) => answerCallback(answer, i)}
-                            interactable={playerAnswers.lastIndexOf("unanswered") == i}
+                            interactable={!tutorial && playerAnswers.lastIndexOf("unanswered") == i}
                         />)
                 }
+                <Tutorial onComplete={() => setTutorial(false)} onInteract={() => setShowPrompt(false)} />
+
             </div>
             <div style={styles.questionCounter}>{data.questions.length - playerAnswers.lastIndexOf("unanswered")} di {data.questions.length}</div>
         </Layout>}

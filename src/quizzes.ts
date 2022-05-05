@@ -26,7 +26,7 @@ const data: Quiz[] = [
             {
                 question: "La percentuale di adulti analfabeti al mondo è superiore del 15%",
                 answer: "v",
-                funFact: "È in costante disciesa, ma si attesta al 20%",
+                funFact: "È in costante discesa, ma si attesta al 20%",
             },
             {
                 question: "In nessun paese a mondo ci sono più donne che uomini in parlamento",
@@ -34,7 +34,7 @@ const data: Quiz[] = [
                 funFact: "Il Ruanda e la Bolivia hanno più donne che uomini in parlamento",
             },
             {
-                question: "Nel 2017, c’erano più persone in estrema povertà di quelle che possedevano un gatto",
+                question: "Nel 2017, erano di più le persone in estrema povertà che le persone che possedevano un gatto",
                 answer: "v",
                 funFact: "Il numero di gatti si attesta intorno a 650 milioni, mentre il numero di persone in estrema povertà 696 milioni",
             },
@@ -42,16 +42,6 @@ const data: Quiz[] = [
                 question: "Continuando così fermeremo il riscaldamento globale a 1.5 C°, come previsto nell’accordo di Parigi",
                 answer: "f",
                 funFact: "Alla velocità con cui stiamo implementando le misure di sostenibilità, si arriverà ad un massimo di tre gradi",
-            },
-            {
-                question: "Trascina a sinistra per rispondere falso!",
-                answer: "f",
-                funFact: "Se non hai risposto falso, hai perso un punto facile!",
-            },
-            {
-                question: "Trascina a destra per rispondere vero!",
-                answer: "v",
-                funFact: "Anche questa è una domanda facile...",
             },
         ]
     },
